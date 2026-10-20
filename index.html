@@ -596,9 +596,14 @@ function spkTts(text){
 }
 function spkNext(){
   if (SPK.i >= SPK.list.length) { spkDone(); return; }
-  const a = new Audio(AUDIO_DIR + SPK.list[SPK.i]); SPK.audio = a;
+  const alt = SPK.alt; SPK.alt = false;
+  const a = new Audio((alt ? '' : AUDIO_DIR) + SPK.list[SPK.i]); SPK.audio = a;
   a.onended = () => { SPK.i++; spkNext(); };
-  a.onerror = () => { const text = SPK.btn ? SPK.btn.dataset.say : ''; SPK.audio = null; spkTts(text); };  // нет записи — читаем синтезом
+  a.onerror = () => {
+    if (a.failed || SPK.audio !== a) return; a.failed = true;
+    if (!alt) { SPK.alt = true; spkNext(); return; }  // записи могут лежать рядом со страницей, а не в папке audio
+    const text = SPK.btn ? SPK.btn.dataset.say : ''; SPK.audio = null; spkTts(text);  // нет записи — читаем синтезом
+  };
   try { const pr = a.play(); if (pr && pr.catch) pr.catch(() => a.onerror && a.onerror()); } catch (_) { a.onerror(); }
 }
 function spkToggle(b){
