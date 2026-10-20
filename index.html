@@ -1,0 +1,1046 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head><body>
+<title>Не верь на слово 60+</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Literata:opsz,wght@7..72,600;7..72,700&display=swap">
+<style>
+/* Одна колонка «как газета крупным шрифтом»: один шаг — один экран, большие кнопки во всю ширину */
+:root{
+  --paper:#F2F5F7; --card:#FFFFFF; --ink:#14212E; --muted:#4A5866; --line:#C7D1DA;
+  --safe:#0E6B4F; --safe-ink:#FFFFFF; --safe-soft:#DDF0E8;
+  --alarm:#A8261C; --alarm-soft:#FBE5E1; --gold:#9A6A00; --gold-soft:#FFF1CC;
+  --display:'Literata', Georgia, 'Times New Roman', serif;
+  --body:'Golos Text', 'Segoe UI', Arial, sans-serif;
+  --fs:20px;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --paper:#0F1720; --card:#17222D; --ink:#EEF3F6; --muted:#A9B6C2; --line:#2E3E4C;
+  --safe:#5BD1A4; --safe-ink:#08261C; --safe-soft:#123A2D; --alarm:#FF8F84; --alarm-soft:#3A1714;
+  --gold:#F2C24F; --gold-soft:#3A2E0E; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --paper:#0F1720; --card:#17222D; --ink:#EEF3F6; --muted:#A9B6C2; --line:#2E3E4C;
+  --safe:#5BD1A4; --safe-ink:#08261C; --safe-soft:#123A2D; --alarm:#FF8F84; --alarm-soft:#3A1714;
+  --gold:#F2C24F; --gold-soft:#3A2E0E; color-scheme:dark }
+*,*::before,*::after{box-sizing:border-box}
+html{font-size:var(--fs)}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:1rem;line-height:1.6;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+.wrap{max-width:1220px;margin:0 auto;padding-block:28px 72px;display:flex;flex-direction:column;gap:36px}
+#app{display:flex;flex-direction:column;gap:28px}
+.head{display:flex;flex-direction:column;gap:14px}
+.back{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:6px 14px 6px 10px;margin-left:-10px;border-radius:12px;border:0;background:transparent;color:var(--safe);font-weight:600;font-size:1rem}
+.back:hover{background:var(--safe-soft)}
+.crumbs{display:flex;align-items:center;gap:6px 14px;flex-wrap:wrap}
+.crumbs .sep{width:1px;height:22px;background:var(--line)}
+.crumbs .eyebrow{margin:0}
+/* шаги урока — полоса прогресса из 4 частей */
+.prog{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:4px}
+.prog .seg{display:flex;flex-direction:column;gap:8px;min-width:0;min-height:48px;padding:6px 2px;margin:0;border:0;border-radius:10px;background:transparent;color:inherit;font:inherit;text-align:left;cursor:pointer}
+.prog .seg:hover span{color:var(--safe);text-decoration:underline}
+.prog .seg.on{cursor:default}
+.hint{margin:-4px 0 0;font-size:.82rem;color:var(--muted)}
+.prog .seg.on:hover span{text-decoration:none;color:var(--ink)}
+.prog .seg i{display:block;height:10px;border-radius:99px;background:var(--line)}
+.prog .seg.done i{background:var(--safe)}
+.prog .seg.on i{background:linear-gradient(90deg,var(--safe) 0 50%,color-mix(in srgb, var(--safe) 30%, var(--line)) 50%)}
+.prog .seg span{font-size:.85rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.prog .seg.on span{color:var(--ink);font-weight:700}
+.prog .seg.done span{color:var(--safe)}
+.stack{display:flex;flex-direction:column;gap:14px}
+h1,h2,h3{font-family:var(--display);font-weight:700;line-height:1.25;letter-spacing:-.005em;margin:0;text-wrap:balance}
+h1{font-size:1.8rem} h2{font-size:1.4rem} h3{font-size:1.15rem}
+p{margin:0}
+a{color:var(--safe)}
+button{font:inherit;cursor:pointer}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:4px solid var(--gold);outline-offset:3px}
+.top{display:flex;align-items:center;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:22px}
+.brand{display:flex;align-items:center;gap:14px;flex:1;min-width:0}
+.brand svg{width:44px;height:44px;flex:none}
+.brand b{font-family:var(--display);font-size:1.2rem;line-height:1.3;text-wrap:balance}
+.brand small{display:block;margin-top:4px;color:var(--muted);font-family:var(--body);font-size:.8rem;font-weight:500}
+.tools{display:flex;gap:8px}
+.sbtn{min-height:52px;min-width:56px;padding:6px 14px;border-radius:14px;border:2px solid var(--line);background:var(--card);color:var(--ink);font-weight:700}
+.stars{display:inline-flex;align-items:center;gap:6px;background:var(--gold-soft);color:var(--gold);border-radius:999px;padding:6px 14px;font-weight:700}
+.stars svg{width:22px;height:22px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:clamp(22px,5vw,36px);display:flex;flex-direction:column;gap:20px;box-shadow:0 1px 2px color-mix(in srgb, var(--ink) 6%, transparent)}
+.lead{font-size:1.1rem;line-height:1.6;color:var(--muted)}
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;min-height:68px;padding:14px 24px;border-radius:18px;border:2px solid var(--safe);background:var(--safe);color:var(--safe-ink);font-weight:600;font-size:1.1rem;text-align:center}
+.btn.ghost{background:var(--card);color:var(--ink);border-color:var(--line)}
+.btn.alarm{background:var(--alarm);border-color:var(--alarm);color:#FFFFFF}
+.btn svg{width:24px;height:24px;flex:none}
+.btn:disabled{opacity:.45;cursor:default}
+.actions{display:flex;flex-direction:column;gap:14px}
+.row{display:flex;gap:14px;flex-wrap:wrap}
+.row > *{flex:1 1 220px}
+.lesson{display:flex;align-items:center;gap:16px;width:100%;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px 22px;color:var(--ink);min-height:92px}
+.lesson .num{flex:none;width:52px;height:52px;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-size:1.3rem;background:var(--paper);border:2px solid var(--line)}
+.lesson.done .num{background:var(--safe);color:var(--safe-ink);border-color:var(--safe)}
+.lesson .t{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
+.lesson .t b{font-size:1.1rem;font-weight:600}
+.lesson .t span{color:var(--muted);font-size:.95rem}
+.tag{display:inline-block;border-radius:999px;padding:2px 10px;font-size:.8rem;font-weight:700;background:var(--alarm-soft);color:var(--alarm)}
+.tag.ok{background:var(--safe-soft);color:var(--safe)}
+.eyebrow{font-size:.78rem;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.steps{display:flex;gap:10px;flex-wrap:wrap}
+.steps span{font-size:.85rem;padding:6px 14px;border-radius:999px;border:2px solid var(--line);color:var(--muted)}
+.steps span.on{border-color:var(--safe);background:var(--safe);color:var(--safe-ink);font-weight:600}
+/* видео-сюжет */
+.screen{background:var(--ink);color:var(--paper);border-radius:22px;padding:clamp(28px,6vw,48px) clamp(22px,5vw,40px);display:flex;flex-direction:column;justify-content:center;gap:28px;min-height:340px}
+.screen .pic{display:flex;justify-content:center}
+.screen .pic svg{width:112px;height:112px}
+.screen .cap{font-size:1.3rem;line-height:1.55;text-align:center;max-width:30ch;margin:0 auto;text-wrap:balance}
+.player{position:relative;padding:clamp(24px,5vw,40px) clamp(18px,4vw,32px) 18px;gap:22px;min-height:0}
+.stage{flex:1;display:flex;flex-direction:column;justify-content:center;gap:22px;min-height:230px;cursor:pointer;animation:fadein .45s ease}
+@keyframes fadein{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.ctrl{display:flex;align-items:center;gap:10px}
+@media (min-width: 700px){ .player{aspect-ratio:16/9} .player .pic svg{width:128px;height:128px} .player .cap{font-size:1.5rem;max-width:32ch} }
+.ctrl button{flex:none;width:52px;height:52px;border-radius:50%;border:0;display:grid;place-items:center;background:color-mix(in srgb, var(--paper) 14%, transparent);color:var(--paper)}
+.ctrl button.main{width:60px;height:60px;background:var(--paper);color:var(--ink)}
+.ctrl button svg{width:24px;height:24px}
+.ctrl button:disabled{opacity:.3;cursor:default}
+.ctrl .bar{flex:1;min-width:40px}
+.ctrl .t{flex:none;font-size:.85rem;opacity:.8;font-variant-numeric:tabular-nums}
+.bigplay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;border:0;border-radius:inherit;background:var(--ink);color:var(--paper);font:inherit;cursor:pointer}
+.bigplay .c{width:108px;height:108px;border-radius:50%;display:grid;place-items:center;background:var(--safe);color:var(--safe-ink);box-shadow:0 10px 30px rgba(0,0,0,.35);transition:transform .15s}
+.bigplay:hover .c{transform:scale(1.06)}
+.bigplay .c svg{width:46px;height:46px;margin-left:6px}
+.bigplay .l{font-size:1.25rem;font-weight:600}
+.bigplay .d{font-size:.9rem;opacity:.8}
+.screen.real{padding:0;min-height:0;overflow:hidden}
+.screen.real video{display:block;width:100%;aspect-ratio:16/9;background:#000}
+.bar{height:8px;border-radius:99px;background:color-mix(in srgb, var(--paper) 25%, transparent);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--gold);transition:width .3s}
+.meta{color:var(--muted);font-size:.9rem;text-align:center}
+/* вопросы */
+.opts{display:flex;flex-direction:column;gap:14px}
+.opt{width:100%;text-align:left;min-height:68px;padding:16px 22px;border-radius:18px;border:2px solid var(--line);background:var(--card);color:var(--ink);font-size:1.05rem;font-weight:500;line-height:1.45}
+.opt.right{border-color:var(--safe);background:var(--safe-soft)}
+.opt.wrong{border-color:var(--alarm);background:var(--alarm-soft)}
+.fb{border-radius:18px;padding:20px 22px;display:flex;flex-direction:column;gap:10px}
+.fb.good{background:var(--safe-soft)} .fb.bad{background:var(--alarm-soft)}
+.fb b{font-size:1.15rem}
+/* телефон */
+.phone{max-width:420px;width:100%;margin:0 auto;background:var(--ink);color:var(--paper);border-radius:34px;padding:28px 22px;display:flex;flex-direction:column;gap:18px;border:6px solid color-mix(in srgb, var(--ink) 70%, var(--line))}
+.phone .who{text-align:center;display:flex;flex-direction:column;gap:2px}
+.phone .who b{font-family:var(--display);font-size:1.3rem}
+.phone .who span{opacity:.75;font-size:.9rem}
+.bubble{background:color-mix(in srgb, var(--paper) 12%, var(--ink));border-radius:18px 18px 18px 4px;padding:14px 18px;font-size:1.05rem;line-height:1.5}
+.ring{display:flex;gap:14px}
+.ring button{flex:1;min-height:72px;border-radius:999px;border:0;font-weight:700;font-size:1.05rem}
+.ring .yes{background:#1E9E62;color:#FFFFFF} .ring .no{background:#D93A2F;color:#FFFFFF}
+.end{display:flex;flex-direction:column;gap:18px;align-items:center;text-align:center}
+.end > svg,.end > span > svg{width:84px;height:84px}
+.memo{margin:0;padding-left:1.3em;display:flex;flex-direction:column;gap:12px;line-height:1.55}
+.memo li::marker{color:var(--safe)}
+.rule{font-family:var(--display);font-size:1.3rem;line-height:1.3;border-left:5px solid var(--safe);padding:8px 0 8px 22px;text-align:left}
+/* истории */
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips a{display:inline-flex;gap:6px;align-items:center;min-height:44px;padding:6px 14px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink);text-decoration:none;font-size:.9rem}
+.chips a span{color:var(--muted)}
+.chips a:hover{border-color:var(--safe);color:var(--safe)}
+.case{display:flex;flex-direction:column;gap:10px;width:100%;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px 22px;color:var(--ink)}
+.case .d{color:var(--muted);font-size:.9rem;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.story{font-size:1.1rem;line-height:1.65}
+.src{font-size:.9rem;color:var(--muted)}
+/* семья */
+.check{display:flex;gap:16px;align-items:flex-start;padding:18px 0;border-bottom:1px solid var(--line);cursor:pointer}
+.check input{width:32px;height:32px;flex:none;accent-color:var(--safe);margin-top:2px}
+.check small{display:block;margin-top:4px;color:var(--muted);font-size:.9rem;line-height:1.5}
+.copybox{width:100%;min-height:140px;font:inherit;font-size:.95rem;border:2px solid var(--line);border-radius:14px;padding:12px;background:var(--paper);color:var(--ink)}
+.cert{border:4px double var(--gold);border-radius:22px;padding:40px 24px;text-align:center;display:flex;flex-direction:column;gap:16px;background:var(--card)}
+.cert .nm{font-family:var(--display);font-size:1.6rem}
+.field{display:flex;flex-direction:column;gap:6px;font-weight:700}
+.field input{font:inherit;min-height:56px;border-radius:12px;border:2px solid var(--line);padding:8px 14px;background:var(--card);color:var(--ink)}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom, 0px));background:var(--ink);color:var(--paper);padding:14px 22px;border-radius:16px;font-weight:700;max-width:90%;text-align:center;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+/* ---------- каркас: панель уроков слева + содержимое ---------- */
+.layout{display:grid;grid-template-columns:minmax(0,1fr);gap:40px;align-items:start}
+#app{width:100%;max-width:880px;min-width:0;margin-inline:auto}
+.side{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px 16px;display:flex;flex-direction:column;gap:18px}
+.side .close{align-self:flex-end}
+.sprog{display:flex;flex-direction:column;gap:10px;padding-inline:6px}
+.sprog .r{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.sprog .pbar{height:10px;border-radius:99px;background:var(--line);overflow:hidden}
+.sprog .pbar i{display:block;height:100%;background:var(--safe);border-radius:99px}
+.nav{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+.nav button{display:flex;align-items:center;gap:12px;width:100%;text-align:left;min-height:58px;padding:8px 10px;border-radius:14px;border:0;background:transparent;color:var(--ink);font-size:.92rem;line-height:1.3}
+.nav button:hover{background:var(--paper)}
+.nav button[aria-current="page"]{background:var(--safe-soft);font-weight:600}
+.nav .n{flex:none;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;border:2px solid var(--line);background:var(--card);font-family:var(--display);font-size:.95rem}
+.nav .n svg{width:18px;height:18px}
+.nav .done .n{background:var(--safe);border-color:var(--safe);color:var(--safe-ink)}
+.nav .lock button{color:var(--muted)}
+.nav .t2{display:flex;flex-direction:column;gap:3px;min-width:0}
+.nav .t2 small{font-size:.78rem;color:var(--muted);font-weight:400}
+.side hr{border:0;border-top:1px solid var(--line);margin:0 6px}
+.menu-btn{display:inline-flex;align-items:center;gap:8px}
+.menu-btn svg{width:22px;height:22px}
+.backdrop{position:fixed;inset:0;z-index:25;background:rgba(10,20,30,.5)}
+@media (min-width: 1000px){
+  .layout{grid-template-columns:290px minmax(0,1fr)}
+  .side{position:sticky;top:24px;max-height:calc(100vh - 48px);overflow:auto}
+  .side .close,.menu-btn,.backdrop{display:none!important}
+}
+@media (max-width: 999px){
+  .side{position:fixed;z-index:30;top:0;bottom:0;left:0;width:min(88vw,360px);overflow:auto;border-radius:0 22px 22px 0;
+    padding-top:calc(18px + env(safe-area-inset-top, 0px));padding-bottom:calc(24px + env(safe-area-inset-bottom, 0px));padding-left:max(16px, env(safe-area-inset-left, 0px));
+    transform:translateX(-105%);visibility:hidden;transition:transform .25s ease, visibility 0s .25s;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+  .side.open{transform:none;visibility:visible;transition:transform .25s ease}
+}
+@media (max-width: 420px){ .menu-btn span{display:none} }
+/* ---------- курс пройден ---------- */
+.hero-done{text-align:center;display:flex;flex-direction:column;align-items:center;gap:16px;padding-block:8px}
+.medal{width:124px;height:124px;border-radius:50%;display:grid;place-items:center;background:var(--gold-soft);border:4px solid var(--gold);animation:pop .7s cubic-bezier(.3,1.6,.5,1)}
+.medal svg{width:66px;height:66px}
+@keyframes pop{from{transform:scale(.3);opacity:0}to{transform:none;opacity:1}}
+.hero-done h1{font-size:clamp(1.6rem,4.5vw,2.3rem)}
+.hero-done .lead{max-width:40ch}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:6px}
+.tile b{font-family:var(--display);font-size:2.3rem;line-height:1;color:var(--safe)}
+.tile.gold b{color:var(--gold)}
+.tile span{color:var(--muted);font-size:.9rem;line-height:1.35}
+.rules{margin:0;padding-left:1.5em;display:flex;flex-direction:column;gap:14px}
+.rules li{padding-left:6px;line-height:1.55}
+.rules li::marker{font-family:var(--display);font-weight:700;color:var(--safe)}
+.cert .ct{font-family:var(--display);font-size:clamp(1.5rem,4vw,2rem);line-height:1.2}
+.cert .small{color:var(--muted);font-size:.9rem}
+.cert .nm{color:var(--safe);border-bottom:1px solid var(--line);padding-bottom:10px;margin-inline:auto;min-width:min(100%,320px)}
+.cfoot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);padding-top:14px}
+.confetti{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:40}
+.confetti i{position:absolute;top:-24px;width:10px;height:16px;border-radius:2px;animation:fall 3.4s ease-in forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(600deg)}}
+@media (max-width: 560px){
+  .wrap{padding-block:14px 56px;gap:20px}
+  #app{gap:20px}
+  .top{padding-bottom:12px;gap:10px}
+  .brand{gap:10px}
+  .brand svg{width:34px;height:34px}
+  .brand b{font-size:.95rem;line-height:1.2}
+  .tools{gap:6px}
+  .prog .ck{display:none}
+  h2{font-size:1.25rem}
+  .rule{font-size:1.15rem}
+  .card{padding:20px;gap:16px}
+  .phone{padding:22px 14px;border-width:4px;border-radius:28px}
+  .brand small{display:none}
+  .sbtn{min-height:48px;min-width:46px;padding:6px 10px}
+  .head{gap:8px}
+  .prog .seg span{font-size:.72rem}
+  .prog{gap:5px}
+  h1{font-size:1.4rem}
+  .back{min-height:46px;font-size:.9rem}
+  .steps{gap:6px}
+  .steps span{font-size:.75rem;padding:4px 10px}
+  .stage{min-height:200px}
+  .ctrl{gap:8px}
+  .ctrl button{width:46px;height:46px}
+  .ctrl button.main{width:54px;height:54px}
+}
+@media (prefers-reduced-motion: reduce){ *{transition:none!important;animation:none!important} }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="brand" id="home-link" role="button" tabindex="0" aria-label="На главную">
+      <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 4 L40 10 V22 C40 33 33 41 24 44 C15 41 8 33 8 22 V10 Z" fill="var(--safe)"/><path d="M16 24 L22 30 L33 18" stroke="var(--safe-ink)" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <b>Не верь на слово<small>Защита от мошенников · 60+</small></b>
+    </div>
+    <div class="tools">
+      <button class="sbtn menu-btn" id="menu" type="button" aria-controls="side" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg><span>Уроки</span></button>
+      <button class="sbtn" id="fs-minus" type="button" aria-label="Уменьшить шрифт">А−</button>
+      <button class="sbtn" id="fs-plus" type="button" aria-label="Увеличить шрифт">А+</button>
+    </div>
+  </header>
+  <div class="layout">
+    <aside class="side" id="side" aria-label="Уроки курса"></aside>
+    <main id="app" aria-live="polite"></main>
+  </div>
+</div>
+<div class="backdrop" id="backdrop" hidden></div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+/* ---------- иконки ---------- */
+const IC = {
+  phone:'<svg viewBox="0 0 64 64" aria-hidden="true"><rect x="18" y="4" width="28" height="56" rx="6" fill="none" stroke="currentColor" stroke-width="4"/><circle cx="32" cy="51" r="3" fill="currentColor"/></svg>',
+  shield:'<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 4 L40 10 V22 C40 33 33 41 24 44 C15 41 8 33 8 22 V10 Z" fill="var(--safe)"/><path d="M16 24 L22 30 L33 18" stroke="var(--safe-ink)" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  warn:'<svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 6 L60 56 H4 Z" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/><path d="M32 24 V40" stroke="currentColor" stroke-width="5" stroke-linecap="round"/><circle cx="32" cy="48" r="3" fill="currentColor"/></svg>',
+  badge:'<svg viewBox="0 0 64 64" aria-hidden="true"><rect x="8" y="14" width="48" height="36" rx="5" fill="none" stroke="currentColor" stroke-width="4"/><circle cx="24" cy="30" r="6" fill="none" stroke="currentColor" stroke-width="3"/><path d="M36 26 H50 M36 34 H48 M16 44 H32" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>',
+  home:'<svg viewBox="0 0 64 64" aria-hidden="true"><path d="M8 30 L32 10 L56 30" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/><path d="M14 26 V54 H50 V26" fill="none" stroke="currentColor" stroke-width="4"/><rect x="27" y="38" width="10" height="16" fill="currentColor"/></svg>',
+  key:'<svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="22" cy="32" r="12" fill="none" stroke="currentColor" stroke-width="4"/><path d="M34 32 H58 M50 32 V42 M42 32 V40" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg>',
+  family:'<svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="20" cy="18" r="7" fill="currentColor"/><circle cx="44" cy="18" r="7" fill="currentColor"/><circle cx="32" cy="36" r="5" fill="currentColor"/><path d="M8 54 C8 38 32 38 32 46 C32 38 56 38 56 54" fill="none" stroke="currentColor" stroke-width="4"/></svg>',
+  money:'<svg viewBox="0 0 64 64" aria-hidden="true"><rect x="6" y="16" width="52" height="32" rx="4" fill="none" stroke="currentColor" stroke-width="4"/><circle cx="32" cy="32" r="8" fill="none" stroke="currentColor" stroke-width="4"/></svg>',
+  pause:'<svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="26" fill="none" stroke="currentColor" stroke-width="4"/><path d="M26 22 V42 M38 22 V42" stroke="currentColor" stroke-width="5" stroke-linecap="round"/></svg>',
+  star:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.5 7 .8-5.2 4.8 1.4 7L12 17.7 5.8 21l1.4-7L2 9.3l7-.8z" fill="currentColor"/></svg>',
+  play:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4 L20 12 L7 20 Z" fill="currentColor"/></svg>',
+  speak:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9 H8 L13 5 V19 L8 15 H4 Z" fill="currentColor"/><path d="M16 9 C17.5 10.5 17.5 13.5 16 15 M18.5 6.5 C21.5 9.5 21.5 14.5 18.5 17.5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>'
+};
+
+/* ---------- содержание курса ---------- */
+const LESSONS = [
+ { id:'l1', mp4:'video/l1.mp4', poster:'video/l1.jpg', title:'Почему обманывают умных людей', sub:'Четыре приёма давления, которыми пользуются мошенники',
+   video:[
+    ['warn','Каждый день мошенники звонят тысячам людей. Обманывают учителей, врачей, инженеров — людей умных и опытных.'],
+    ['phone','Дело не в уме. Мошенники работают по готовым сценариям. Это обученные люди, и их цель — не дать вам подумать.'],
+    ['warn','Первый приём давления — страх: «С вашего счёта крадут деньги!»'],
+    ['pause','Второй — срочность: «Действовать нужно прямо сейчас». Третий — секрет: «Никому не говорите, даже родным».'],
+    ['badge','Четвёртый — уважение к власти: «С вами говорит майор», «служба безопасности банка», «пенсионный фонд».'],
+    ['pause','Чаще всего мошенники звонят перед праздниками и в суматохе: когда вы торопитесь, устали или чем-то расстроены. В такие минуты особенно важно не спешить.'],
+    ['shield','Заметили хотя бы один такой приём — остановитесь. Положить трубку — это не грубость. Это защита.']],
+   quiz:[
+    {q:'Почему мошенникам удаётся обмануть даже образованных людей?', o:['Они давят на чувства и не дают времени подумать','Образованные люди хуже разбираются в деньгах','Мошенникам просто везёт'], a:0, ex:'Страх и спешка мешают думать любому человеку. Поэтому главное оружие — пауза.'},
+    {q:'Звонящий говорит: «Никому не рассказывайте о разговоре, это тайна». Что это значит?', o:['Это приём мошенников: так вам не дают посоветоваться','Это обычное требование полиции','Нужно молчать, чтобы помочь следствию'], a:0, ex:'Настоящие службы не запрещают говорить с родными. Запрет нужен только обманщикам.'},
+    {q:'Что лучше всего сделать, если звонок пугает и торопит?', o:['Положить трубку и спокойно проверить','Сделать, что просят, а потом разобраться','Продолжить разговор, чтобы узнать подробности'], a:0, ex:'Чем дольше разговор, тем сильнее давление. Проверить можно потом — по номеру, который вы найдёте сами.'}],
+   rule:'Страх, спешка, секрет и «звание» — четыре признака обмана. Услышали — кладите трубку.',
+   call:{ who:'Служба безопасности банка', num:'+7 (495) ··· ·· ··',
+     start:'a',
+     nodes:{
+      a:{say:['Добрый день! {name}? У меня в карточке ваш адрес и дата рождения — всё верно?','Меня зовут Андрей, служба безопасности вашего банка. Не волнуйтесь, я звоню, чтобы помочь.'],
+         ch:[['Да, это я','a2'],['Скажу, что перезвоню в банк по номеру с карты, и положу трубку','good']]},
+      a2:{say:['{name}, только что кто-то пытался перевести 47 000 рублей с вашей карты в Новосибирск. Это вы?'],
+         ch:[['Нет, не я! Что делать?','b'],['Положу трубку и позвоню в банк по номеру на карте','good']]},
+      b:{say:['Значит, это мошенники. Сейчас мы отменим перевод.','Вам придёт СМС с кодом. Продиктуйте его мне, пожалуйста.'],
+         ch:[['Продиктую код','bad'],['Скажу: «Я перезвоню в банк» — и положу трубку','good']]},
+      good:{end:'good', text:'Правильно! Звонящий знал ваше имя и адрес — но это ничего не доказывает: такие данные давно утекли в интернет. Настоящий банк никогда не просит коды из СМС. Звоните только по номеру с обратной стороны карты.'},
+      bad:{end:'bad', text:'Код из СМС — это ваша подпись. С ним мошенники вошли в ваш банк и перевели деньги. Банк не просит коды по телефону.'}}}
+ },
+ { id:'lm', mp4:'video/lm.mp4', poster:'video/lm.jpg', title:'Как мошенники ведут разговор', sub:'Приёмы манипуляции: от вежливости до «не кладите трубку»',
+   video:[
+    ['badge','Мошенник начинает не с угроз, а со знакомства. Он вежлив, называет вас по имени и отчеству, знает адрес, возраст, иногда даже номер паспорта.'],
+    ['warn','Откуда? Данные миллионов людей утекли из разных баз и продаются в интернете. То, что звонящий знает о вас всё, ничего не доказывает.'],
+    ['phone','Дальше — маленькие шаги. «Просто подтвердите, что это вы». «Просто скажите, в каком вы банке». Каждое «да» всё глубже затягивает в разговор.'],
+    ['family','Потом вас передают по цепочке: банк — полиция — ФСБ — Центробанк. Много разных голосов создают впечатление настоящей операции.'],
+    ['pause','Вас держат на линии часами, просят не класть трубку и никому не звонить. Человек устаёт, и ему уже трудно думать.'],
+    ['money','В ход идут вина и надежда: «Вы можете стать соучастником», «Только вы поможете следствию», «Мы вернём ваши деньги».'],
+    ['warn','Приём «плохой и хороший полицейский». Сначала вас пугают: «в ваши Госуслуги вошли», «с вашего счёта ушли деньги». А через полчаса звонит вежливый «спаситель» из поддержки — и ему человек уже рассказывает всё. Спаситель — из той же банды.'],
+    ['family','Мошенники умеют даже «проколоться» нарочно: будто забыли выключить микрофон. Вы радуетесь, что раскусили обман, — и следующему, «настоящему» звонку верите без сомнений.'],
+    ['badge','«Роль спасателя»: «только вы можете помочь», «спасите близких», «помогите поймать преступника». На неё попадаются самые добрые и ответственные люди.'],
+    ['shield','Против всех этих приёмов работает одно: прервать разговор. Положить трубку можно в любой момент — даже на середине фразы.']],
+   quiz:[
+    {q:'Звонящий назвал ваше полное имя, адрес и номер паспорта. Значит…', o:['Ничего не значит: эти данные могли утечь в интернет','Это точно сотрудник банка или полиции','Звонку можно доверять'], a:0, ex:'Базы с данными миллионов людей продаются в интернете. Знание ваших данных — не удостоверение.'},
+    {q:'«Не кладите трубку, сейчас соединю вас с Центробанком». Что происходит?', o:['Приём «цепочка»: мошенники передают вас друг другу, чтобы всё выглядело серьёзно','Обычная процедура банка','Так работает горячая линия'], a:0, ex:'Банк не переключает клиентов на Центробанк или ФСБ. Несколько «сотрудников» подряд — признак хорошо подготовленного обмана.'},
+    {q:'«Только вы можете помочь поймать преступника, но никому ни слова». На что давят?', o:['На чувство долга и одиночество — чтобы вы ни с кем не посоветовались','На вашу смекалку','Ни на что, это обычная просьба'], a:0, ex:'Мошенникам нужно, чтобы рядом не оказалось никого, кто скажет: «Стой, это обман».'},
+    {q:'Утром вы чуть не назвали код «мастеру по счётчикам», а днём звонят «из поддержки Госуслуг»: «в ваш кабинет вошли, давайте всё исправим». Что это?', o:['Вторая часть того же обмана: «спаситель» тоже мошенник','Настоящая служба поддержки, раз она так быстро отреагировала','Повод рассказать всё подробно, чтобы помогли'], a:0, ex:'Сначала пугают, потом «спасают». Если что-то случилось, звоните сами: в банк — по номеру с карты, на Госуслуги — по номеру с официального сайта.'}],
+   rule:'Знают ваши данные — не значит «свои». Держат на линии и торопят — кладите трубку.',
+   call:{ who:'Пенсионный фонд', num:'+7 (800) ··· ·· ··',
+     start:'a',
+     nodes:{
+      a:{say:['Здравствуйте, {name}! Как ваше самочувствие? У нас записано, что у вас недавно был юбилей, — поздравляем!','Я из пенсионного фонда. Ничего страшного, просто сверим данные: ваш паспорт и СНИЛС у меня в базе, всё совпадает. Верно?'],
+         ch:[['Да, всё верно','b'],['Скажу, что перезвоню в фонд, и положу трубку','good']]},
+      b:{say:['Спасибо! Вам положен перерасчёт пенсии за три года. Сейчас придёт СМС — назовите код, и деньги поступят завтра.','Только трубку не кладите, а то заявка пропадёт.'],
+         ch:[['Назову код','bad'],['Всё равно положу трубку','good']]},
+      good:{end:'good', text:'Отлично! Вас поздравили, назвали паспорт — и всё равно не убедили. Знание ваших данных не делает человека сотрудником фонда, а «не кладите трубку» — верный признак обмана.'},
+      bad:{end:'bad', text:'Код открыл ваши Госуслуги. Вежливость и поздравления были нужны, чтобы вы расслабились и не заметили ловушку.'}}}
+ },
+ { id:'l2', mp4:'video/l2.mp4', poster:'video/l2.jpg', title:'Звонок «из органов»', sub:'ФСБ, полиция, Центробанк и «безопасный счёт»',
+   video:[
+    ['badge','Самая опасная схема последних лет начинается со звонка «из органов»: ФСБ, полиции, прокуратуры или Центробанка.'],
+    ['phone','Звонящий говорит уверенно, называет звание, присылает фото удостоверения, бывает — звонит по видео в форме.'],
+    ['money','Сценарий один: «Ваши деньги пытаются украсть». Чтобы «спасти» их, нужно перевести всё на «безопасный счёт» или отдать курьеру.'],
+    ['home','Дальше — больше: взять кредит, продать квартиру и даже выполнить «секретное задание» — например, поджечь военкомат.'],
+    ['warn','Так пожилые люди теряют квартиры и попадают под суд сами: за поджог отвечает тот, кто поджёг. Мошенников рядом нет.'],
+    ['badge','Как на самом деле. Следователь и полиция вызывают повесткой: в ней ваш статус — свидетель или потерпевший, адрес отдела и время. Могут позвонить и пригласить прийти — но допрос проходит в кабинете, а не по телефону.'],
+    ['money','Ни полиция, ни ФСБ, ни Центробанк не просят перевести деньги, взять кредит, назвать код или «задекларировать» сбережения. Центробанк вообще не открывает счета гражданам.'],
+    ['home','«Полиция» за дверью? Попросите назвать должность, звание, фамилию и показать удостоверение. Дверь не открывайте, пока не позвоните в 102 или в дежурную часть по номеру с официального сайта и не спросите, есть ли такой сотрудник.'],
+    ['pause','Обыск и изъятие денег оформляют протоколом. Никто не забирает деньги «на проверку купюр» или «на хранение» и не проводит «обыск по видеосвязи».'],
+    ['shield','Запомните: настоящие органы не решают дела по телефону, не просят денег и не дают заданий. Безопасных счетов не существует.']],
+   quiz:[
+    {q:'«Майор ФСБ» просит перевести деньги на «безопасный счёт». Что это?', o:['Мошенничество: безопасных счетов не существует','Обычная мера защиты вкладов','Можно перевести, но только половину'], a:0, ex:'Ни ФСБ, ни полиция, ни Центробанк не переводят деньги граждан на какие-то счета.'},
+    {q:'Вам прислали фото удостоверения сотрудника полиции. Это доказательство?', o:['Нет: фото документа легко подделать','Да, раз есть удостоверение','Да, если на фото есть печать'], a:0, ex:'Подделать картинку — минута работы. Проверяют не документ на экране, а звонком по номеру с официального сайта или 102.'},
+    {q:'«Следователь» советует продать квартиру, чтобы «защитить деньги». Что делать?', o:['Прекратить разговор, рассказать родным и позвонить в полицию по 102','Продать, но не говорить родным','Сначала узнать у него подробности'], a:0, ex:'Ни один следователь не просит продавать жильё. Это верный признак обмана.'},
+    {q:'Звонок: «Вы свидетель по делу. Допросим вас по телефону, только никому не говорите». Как на самом деле?', o:['Так не бывает: на допрос вызывают повесткой, и проходит он у следователя, а не по телефону','Нужно отвечать — это помощь следствию','Попросить номер дела и продолжить разговор'], a:0, ex:'Позвонить, чтобы пригласить прийти, могут. Но допрашивают в кабинете, под протокол. Расспросы о деньгах и «никому не говорите» по телефону — признаки обмана.'},
+    {q:'В дверь звонят: «Полиция, откройте!» — и показывают удостоверение в глазок. Что сделать?', o:['Не открывая, позвонить в 102 или в дежурную часть по номеру с официального сайта и спросить, есть ли такой сотрудник','Открыть: удостоверение же показали','Открыть и отдать деньги, если попросят «на проверку»'], a:0, ex:'Удостоверение легко подделать. Настоящий полицейский подождёт, пока вы проверите. А деньги «на проверку купюр» забирают только мошенники.'}],
+   rule:'Настоящие органы не звонят с просьбой о деньгах. Положите трубку и наберите 102 сами.',
+   memo:['Вызывают повесткой: в ней ваш статус (свидетель, потерпевший), адрес и время. Позвонить и пригласить могут, но допрос — только у следователя, под протокол.',
+         'Полиция, ФСБ, прокуратура и Центробанк никогда не просят перевести деньги, взять кредит, назвать код из СМС или «задекларировать» сбережения.',
+         'Центробанк не открывает счета гражданам. «Безопасных счетов» не существует.',
+         'Сотрудник полиции обязан назвать должность, звание и фамилию и по вашей просьбе показать удостоверение.',
+         'Сомневаетесь — не открывайте дверь. Позвоните в 102 или в дежурную часть по номеру с официального сайта МВД и спросите, есть ли такой сотрудник и правда ли его прислали.',
+         'Обыск и изъятие денег оформляют протоколом. «Проверка купюр», «хранение у курьера» и «обыск по видеосвязи» — обман.',
+         'Кредит, взятый по указке «полиции», остаётся вашим долгом. А квартиру, проданную по указке мошенников, суды не всегда возвращают.'],
+   call:{ who:'Майор ФСБ Соколов', num:'Номер скрыт',
+     start:'a',
+     nodes:{
+      a:{say:['{name}? Майор ФСБ Соколов, удостоверение номер 04-317. Ваши паспортные данные и адрес у меня в деле.','Прошу вас не пугаться. На ваше имя пытались оформить кредит, а деньги ушли бы преступникам. Вы можете оказаться соучастником преступления.'],
+         ch:[['Испугаюсь и спрошу, что делать','b'],['Скажу, что перезвоню, и положу трубку','good']]},
+      b:{say:['Мы вам поможем. Но это государственная тайна: родным ни слова.','Сейчас вам позвонит сотрудник Центробанка и скажет, куда перевести сбережения.'],
+         ch:[['Буду ждать звонка','bad'],['Позвоню родным и всё расскажу','good']]},
+      good:{end:'good', text:'Верно! «Никому не говорите» — главный признак обмана. Родные помогут остановиться, а настоящая ФСБ так не работает.'},
+      bad:{end:'bad', text:'Дальше «сотрудник ЦБ» попросил бы перевести деньги на «безопасный счёт», потом взять кредит и продать квартиру. Так люди теряют всё.'}}}
+ },
+ { id:'l3', mp4:'video/l3.mp4', poster:'video/l3.jpg', title:'«Из служб»: газ, ЖЭК, пенсионный фонд', sub:'Счётчики, Госуслуги и код из СМС',
+   video:[
+    ['home','Мошенники часто представляются коммунальщиками: газовой службой, управляющей компанией, энергосбытом.'],
+    ['phone','Звонят и говорят о «плановой замене счётчиков». Для записи просят назвать код из СМС. Этот код открывает ваши Госуслуги.'],
+    ['warn','Через Госуслуги мошенники узнают ваши данные и оформляют кредиты. А потом звонят уже «из полиции».'],
+    ['badge','Бывает, «газовщик» приходит домой и требует купить дорогой прибор, иначе «отключат газ». Настоящие службы так не делают.'],
+    ['money','Похожие звонки — «из пенсионного фонда»: «Вам положена доплата», «нужно пересчитать пенсию». Фонд не просит коды и данные карты.'],
+    ['shield','Код из СМС — никому. Пришли домой — попросите удостоверение и позвоните в службу по номеру из квитанции.']],
+   quiz:[
+    {q:'Звонят «из управляющей компании»: замена счётчиков, продиктуйте код из СМС для записи. Что делать?', o:['Не называть код и положить трубку','Назвать код — это же для записи','Спросить, когда придёт мастер, и назвать код'], a:0, ex:'Для записи к мастеру код не нужен. Код нужен мошенникам, чтобы войти в ваши Госуслуги.'},
+    {q:'Пришёл «газовщик»: без нового прибора за 15 000 ₽ газ отключат. Как поступить?', o:['Не платить и позвонить в газовую службу по номеру из квитанции','Заплатить, чтобы не отключили','Попросить скидку'], a:0, ex:'Ничего не покупайте на пороге. Сначала проверьте, присылала ли служба этого мастера.'},
+    {q:'«Пенсионный фонд» предлагает доплату и просит номер карты и код. Это…', o:['Обман: фонд не просит коды и данные карты','Нормально: им же нужно перевести деньги','Нормально, если звонят с московского номера'], a:0, ex:'Социальный фонд сам знает, куда вам перечислять пенсию. Коды и данные карты ему не нужны.'}],
+   rule:'Код из СМС — никому, даже «для записи». Мастера проверяйте по номеру из квитанции.',
+   call:{ who:'Управляющая компания', num:'+7 (499) ··· ·· ··',
+     start:'a',
+     nodes:{
+      a:{say:['Добрый день, {name}! Это управляющая компания. В вашем доме плановая замена счётчиков воды, это бесплатно.','Я запишу вас на четверг. Сейчас придёт СМС с кодом — продиктуйте его, пожалуйста.'],
+         ch:[['Продиктую код','bad'],['Скажу, что перезвоню в управляющую компанию, и положу трубку','good']]},
+      good:{end:'good', text:'Отлично! Номер управляющей компании есть в квитанции за квартиру. Позвоните туда сами — и узнаете, была ли такая запись.'},
+      bad:{end:'bad', text:'Это был код от Госуслуг. Через час позвонил бы «следователь» и сказал, что ваши данные украли. Так начинается большой обман.'}}}
+ },
+ { id:'l4', mp4:'video/l4.mp4', poster:'video/l4.jpg', title:'Родные в беде и поддельные голоса', sub:'«Мама, я попал в аварию!»',
+   video:[
+    ['phone','«Мама, я попал в аварию, нужны деньги!» — одна из самых старых схем. И самая болезненная.'],
+    ['warn','Звонят ночью или рано утром, когда человек растерян. Голос плачет, связь плохая — кажется, что это правда родной.'],
+    ['badge','Сегодня мошенники умеют подделывать голос с помощью программ. Им хватает короткой записи из соцсетей.'],
+    ['money','Потом трубку берёт «следователь» или «адвокат»: «Чтобы не было уголовного дела, нужны деньги. Курьер подъедет».'],
+    ['phone','Что делать: положить трубку и самим перезвонить родному на его номер. Или задать вопрос, ответ на который знает только он.'],
+    ['key','А лучше заранее договориться о семейном кодовом слове. Об этом — в последнем уроке.']],
+   quiz:[
+    {q:'Звонит «внук», плачет: попал в аварию, нужны деньги. Что сделать первым?', o:['Положить трубку и перезвонить внуку на его номер','Срочно собрать деньги','Спросить, куда привезти деньги'], a:0, ex:'Один звонок родному на его номер разрушает весь обман.'},
+    {q:'Голос в трубке точь-в-точь как у дочери. Значит, это точно она?', o:['Нет: голос можно подделать программой','Да, голос не подделать','Да, если она называет вас мамой'], a:0, ex:'Подделать голос сегодня несложно. Доверяйте не голосу, а проверке.'},
+    {q:'Как быстро проверить, что звонит действительно родной человек?', o:['Спросить заранее придуманное семейное кодовое слово','Посмотреть на номер на экране','Проверить, знает ли он ваше имя'], a:0, ex:'Номер можно подменить, а имя легко узнать. Кодовое слово знают только свои.'}],
+   rule:'Родной «в беде» — сначала перезвоните ему сами. Деньги курьерам не отдавайте.',
+   call:{ who:'Неизвестный номер', num:'+7 (9··) ··· ·· ··',
+     start:'a',
+     nodes:{
+      a:{say:['Алло, это я! Я в беде… Сбил человека, телефон разбился, звоню с чужого…','Пожалуйста, только маме не говори! Сейчас трубку возьмёт следователь.'],
+         ch:[['Спрошу, чем помочь','b'],['Положу трубку и позвоню внуку на его номер','good']]},
+      b:{say:['Следователь Морозов. Чтобы закрыть дело, нужно 300 000 рублей.','Курьер подъедет через час. Деньги положите в пакет и никому не звоните.'],
+         ch:[['Соберу деньги','bad'],['Спрошу семейное кодовое слово','good']]},
+      good:{end:'good', text:'Правильно! Мошенник не знает ни кодового слова, ни настоящего номера внука. Звонок родному сразу всё проясняет.'},
+      bad:{end:'bad', text:'Курьер забрал бы деньги, а внук в это время спокойно был бы на работе. Перезванивайте родным сами — всегда.'}}}
+ },
+ { id:'l5', mp4:'video/l5.mp4', poster:'video/l5.jpg', title:'Семья — лучшая защита', sub:'Обсудите с родными и заполните семейный договор', family:true,
+   video:[
+    ['family','Мошенники сильнее всего, когда человек один. Поэтому их главное требование — «никому не говорите».'],
+    ['family','Самая надёжная защита — договорённость с семьёй. Её стоит обсудить сегодня, спокойно, за чаем.'],
+    ['key','Придумайте кодовое слово. Его знают только свои. Звонит «родной» и просит денег — спросите кодовое слово.'],
+    ['phone','Договоритесь: любые решения о деньгах по телефону — только после звонка дочери, сыну или внуку.'],
+    ['shield','Попросите родных помочь оформить самозапрет на кредиты через Госуслуги и узнать в банке про доверенное лицо, которое подтверждает крупные переводы.'],
+    ['warn','И главное: если что-то случилось, не стыдитесь. Обмануть могут любого. Чем раньше расскажете родным, тем больше можно спасти.'],
+    ['phone','После обмана часто звонят «юристы» и «консультанты»: «мы нашли ваши деньги и вернём их». Это вторая волна того же обмана. Помощь ищите сами — в полиции и у юриста, которого знают ваши близкие.'],
+    ['family','Внуки — тоже мишень. В играх и чатах детей пугают: «твоей семье грозит беда, спасти её можешь только ты» — и просят коды или телефон взрослых. Скажите внукам: с таким сразу приходите ко мне, ругать не буду.'],
+    ['key','Телефон с банком закройте паролем, который знаете только вы, и не давайте его детям с открытым банковским приложением.']],
+   quiz:[
+    {q:'Зачем семье кодовое слово?', o:['Чтобы быстро проверить, что звонит действительно родной','Чтобы открыть банковскую карту','Чтобы назвать его «сотруднику банка»'], a:0, ex:'Кодовое слово — только для своих. Никаким «сотрудникам» его не называют.'},
+    {q:'Вас всё-таки обманули. Как правильно?', o:['Сразу рассказать родным и позвонить в банк и полицию','Скрыть, чтобы не расстраивать семью','Подождать, вдруг деньги вернут'], a:0, ex:'Банк иногда успевает остановить перевод, если узнает быстро. Стыдиться нечего — виноваты мошенники.'},
+    {q:'Что такое самозапрет на кредиты?', o:['Запрет, из-за которого никто не оформит кредит на ваше имя без вас','Запрет пользоваться банковской картой','Штраф за кредиты'], a:0, ex:'Его ставят через Госуслуги и в любой момент можно снять. Родные помогут оформить.'},
+    {q:'Вас обманули, а через день звонит «юрист»: «мы нашли ваши деньги, вернём за небольшую плату». Что это?', o:['Вторая волна обмана: настоящие юристы так не звонят','Удача — надо соглашаться','Помощь от полиции'], a:0, ex:'«Возвращатели» денег — часто те же мошенники. Обращайтесь в полицию и к юристу, которого вы нашли сами или через близких.'}],
+   rule:'Один в поле не воин. Договоритесь с семьёй сегодня — и мошенникам будет не за что ухватиться.',
+   memoTitle:'Если всё-таки обманули — что делать',
+   memo:['Сразу позвоните в банк по номеру с обратной стороны карты и попросите заблокировать карту и счета.',
+         'Как можно скорее напишите заявление в полицию — позвоните в 102 или придите в отделение. Чем раньше, тем больше шансов найти деньги.',
+         'Расскажите родным. Обмануть могут любого — стыдиться нечего.',
+         'Не верьте тем, кто сам звонит и обещает вернуть деньги: «юристам», «консультантам», «сотрудникам ЦБ». Это вторая волна обмана.',
+         'Поговорите с внуками: если кто-то в интернете пугает и просит коды или телефон взрослых — сразу к вам.']
+ }
+];
+
+const FAMILY = [
+  ['Мы придумали семейное кодовое слово', 'Не записывайте само слово здесь — просто запомните его.'],
+  ['Решения о деньгах по телефону — только после звонка родным', 'Назовите вслух, кому вы позвоните первым.'],
+  ['Номер банка с обратной стороны карты записан у телефона', 'Звонить в банк — только по этому номеру.'],
+  ['Оформлен самозапрет на кредиты', 'Это делается на Госуслугах. Попросите родных помочь.'],
+  ['Узнали в банке про доверенное лицо', 'Это человек, который подтверждает ваши крупные переводы.'],
+  ['Договорились: если обманули — сразу говорим родным', 'Без стыда и упрёков. Чем раньше, тем больше можно спасти.'],
+  ['Поговорили с внуками', 'Если в игре или чате их пугают и просят коды или телефон взрослых — сразу идут к вам. Телефон с банком закрыт паролем.']
+];
+
+/* Реальные истории: новые добавляются каждую неделю (файл cases.json рядом со страницей) */
+/* виды обмана — разделы на странице историй */
+const CASE_CATS = [
+  ['organs', 'Звонят «из органов»: ФСБ, полиция, Центробанк', 'Из органов'],
+  ['bank', '«Банк», «взлом» и безопасный счёт', 'Банк и «безопасный счёт»'],
+  ['services', 'Службы, Социальный фонд, Госуслуги и коды', 'Службы и коды'],
+  ['door', 'У двери: мастера и «госпрограммы»', 'У двери'],
+  ['relatives', 'Родные «в беде»', 'Родные в беде'],
+  ['pressure', 'Давят и не отпускают: как люди спаслись', 'Как люди спаслись'],
+  ['court', 'Что решил суд', 'Что решил суд'],
+  ['other', 'Другие истории', 'Другое'],
+];
+const caseCat = c => CASE_CATS.some(([k]) => k === c.cat) ? c.cat : 'other';
+/* истории к уроку: сначала те, где урок главный, потом по свежести */
+function casesFor(L, n){
+  return CASES.filter(c => (c.les || []).includes(L.id))
+    .sort((a, b) => ((a.les || []).indexOf(L.id) - (b.les || []).indexOf(L.id)) || ((b.ym || 0) - (a.ym || 0)))
+    .slice(0, n);
+}
+function caseCard(c){
+  return `<button class="case" type="button" data-case="${c.id}"><span class="d">${c.new && !ST.cases[c.id] ? '<span class="tag">Новое</span>' : ''}${ST.cases[c.id] ? '<span class="tag ok">Разобрано</span>' : ''}${c.saved ? '<span class="tag ok">Обман не удался</span>' : ''}${esc(c.place)} · ${esc(c.date)}</span><b style="font-size:1.1rem;font-weight:600">${esc(c.title)}</b></button>`;
+}
+let CASES_UPDATED = '2026-10-16';
+let CASES = [
+ {id:'kamchatka', les:['l2', 'l5'], cat:'organs', ym:202609, date:'сентябрь 2026', place:'Камчатка', new:true, title:'«Секретная операция» и проданная квартира',
+  story:'78-летняя жительница Камчатки поверила, что помогает в секретной операции. Сначала отдала курьеру сбережения, затем продала квартиру и отдала выручку «для проверки купюр». Ущерб — больше 7,9 млн рублей. Обман раскрыла дочь.',
+  q:'Какая фраза должна была насторожить с самого начала?', o:['«Это секретная операция, никому не рассказывайте»','«Здравствуйте, вас беспокоят из банка»','«Вы законопослушный гражданин»'], a:0,
+  ex:'Требование хранить тайну от родных — главный признак обмана. Именно дочь в итоге всё и раскрыла.', src:'kamtoday.ru', url:'https://kamtoday.ru/news/crime/pensionerka-s-kamchatki-prodala-kvartiru-i-otdala-moshennikam-7-9-mln-rubley/'},
+ {id:'voronezh', les:['l2', 'lm'], cat:'organs', ym:202609, date:'сентябрь 2026', place:'Воронеж', new:true, title:'Курьерами оказались подростки',
+  story:'65-летней жительнице Воронежа звонили «сотрудники Росфинмониторинга и ФСБ» и убедили продать квартиру. Она отдала 7,7 млн рублей. Полиция задержала курьеров — ими оказались подростки 17 и 18 лет, которые искали «подработку».',
+  q:'Кто на самом деле приезжал за деньгами?', o:['Обычные подростки, которых мошенники наняли курьерами','Сотрудники ФСБ','Инкассаторы банка'], a:0,
+  ex:'Государственные органы не забирают деньги у дверей. Курьер «от ведомства» — верный признак обмана.', src:'voronezhnews.ru', url:'https://voronezhnews.ru/fn_1957660.html'},
+ {id:'moscow21', les:['l1', 'lm'], cat:'bank', ym:202608, date:'август 2026', place:'Москва', new:true, title:'«Ваш аккаунт взломали»',
+  story:'67-летняя москвичка поверила, что её аккаунт взломали. Сначала передала сбережения курьеру, потом продала квартиру и тоже отдала деньги. Общий ущерб — больше 21 млн рублей.',
+  q:'Что нужно было сделать, когда сказали про «взлом»?', o:['Положить трубку и позвонить в банк по номеру с карты','Передать деньги курьеру на хранение','Срочно продать квартиру, пока её не украли'], a:0,
+  ex:'Деньги не «хранят» у курьеров. Банк по своему номеру сам скажет, был ли взлом.', src:'Рамблер/новости', url:'https://news.rambler.ru/incidents/56854204-pensionerka-prodala-kvartiru-i-otdala-moshennikam-bolee-21-mln-rub-v-moskve/'},
+ {id:'msk-voenkomat', les:['l2'], cat:'organs', ym:202608, date:'август 2026', place:'Москва', title:'Военкомат, суд и потерянный дом',
+  story:'68-летняя москвичка поверила звонившим «из ФСБ и Центробанка». По их указанию она подожгла военкомат и получила условный срок. Позже она лишилась и квартиры: её тоже забрали мошенники.',
+  q:'Когда эту историю ещё можно было остановить?', o:['На первом звонке: положить трубку после слов «ФСБ» и «никому не говорите»','Когда дали задание поджечь военкомат','Уже никогда'], a:0,
+  ex:'Мошенники ведут человека шаг за шагом, неделями. Остановиться легче всего в самом начале. За поджог отвечает тот, кто поджёг, — мошенников рядом нет.', src:'msk1.ru', url:'https://msk1.ru/text/incidents/2026/08/05/76571517/'},
+ {id:'schetchiki', les:['l3'], cat:'services', ym:202607, date:'июль 2026', place:'Москва', title:'«Замена счётчиков» по телефону',
+  story:'Москвичей предупредили о мошенниках, которые звонят от имени энергосбыта и других коммунальных служб. Предлагают заменить счётчики или проверить плиту, а для «записи» просят код из СМС.',
+  q:'Для чего мошенникам код из СМС?', o:['Чтобы войти в ваши Госуслуги','Чтобы записать вас к мастеру','Чтобы проверить счётчик'], a:0,
+  ex:'Для записи код не нужен. С ним мошенники получают доступ к вашим данным и могут оформить кредит.', src:'РИА Новости', url:'https://ria.ru/20260715/moshenniki-2104912031.html'},
+ {id:'novosib', les:['l2'], cat:'organs', ym:202311, date:'ноябрь 2023', place:'Новосибирск', title:'Поджог «ради спасения квартиры»',
+  story:'74-летнюю жительницу Новосибирска задержали при попытке поджечь военкомат. Мошенники убедили её, что так она спасёт квартиру, которую она уже передала им.',
+  q:'Почему человек решился на такое?', o:['Мошенники долго запугивали и обещали «спасти» квартиру','Она хотела кому-то навредить','Ей заплатили'], a:0,
+  ex:'Страх и надежда вернуть потерянное лишают сна и сил. Поэтому так важно рассказать родным при первом же подозрении.', src:'news.ru', url:'https://news.ru/regions/pensionerku-zaderzhali-pri-popytke-podzhoga-voenkomata-v-novosibirske'},
+ {id:'gaz', les:['l3'], cat:'door', ym:201804, date:'схема известна с 2018 года', place:'Москва', title:'Лжегазовщики у двери',
+  story:'«Мосгаз» предупреждает: лжегазовщики приходят в дни настоящих обходов, ссылаются на «постановление правительства» и продают дорогие газоанализаторы. Тем, кто отказывается, грозят отключить плиту.',
+  q:'Как проверить мастера у двери?', o:['Попросить удостоверение и позвонить в газовую службу по номеру из квитанции','Поверить, раз пришёл в день обхода','Заплатить, а потом проверить'], a:0,
+  ex:'О плановых работах предупреждают заранее, а у мастера есть бейдж с именем. Деньги на пороге не отдают.', src:'Мосгаз', url:'https://www.mos-gaz.ru/press-service/publications/2018/04/05/2072'},
+ {id:'tj-tea', les:['lm', 'l5', 'l1'], cat:'pressure', ym:0, saved:true, date:'рассказ читателя Т—Ж', place:'Россия', new:true, title:'Три часа на линии — и чай вместо перевода',
+  story:'Пожилым родителям позвонил «курьер Ozon» и выведал код. Дальше по классике: «полковник», «Роскомнадзор», переключения, «безопасный счёт» — их держали на линии около трёх часов. Мама ушла в другую комнату позвонить родным, «полковник» разозлился. Папа сказал: «Скажите алгоритм, я подумаю и перезвоню», — положил трубку и сел пить чай. Деньги остались целы.',
+  q:'Что спасло родителей?', o:['Пауза и разговор с родными: «я подумаю и перезвоню»','Они быстро выполнили все указания','Они перевели деньги на «безопасный счёт»'], a:0,
+  ex:'Мошенникам нужно, чтобы всё делалось прямо сейчас, на эмоциях. Любая пауза и звонок родным ломают их план.', src:'Т—Ж', url:'https://t-j.ru/fraud-older-people/'},
+ {id:'sovcom-credit', les:['l2', 'lm'], cat:'bank', ym:0, date:'рассказ из журнала Совкомбанка', place:'Россия', new:true, title:'Кредит «для поимки мошенника» остался долгом',
+  story:'Мужчине позвонила «сотрудница банка», потом «служба безопасности» и «капитан полиции» — на экране даже высветилось «МВД». Его попросили помочь поймать «нечестного сотрудника банка» и никому не рассказывать. Он взял кредит на 200 тысяч, потом кредитную карту и перевёл всё на «безопасный счёт». Деньги ушли мошенникам, а долг остался ему: оба банка подали в суд, выбраться удалось только через банкротство спустя два года.',
+  q:'Кто платит по кредиту, оформленному по указке «полиции»?', o:['Сам человек: долг перед банком остаётся на нём','Полиция','Мошенников обязательно найдут, и они заплатят'], a:0,
+  ex:'Доказать, что кредит взят под давлением, очень трудно. Поэтому любые «кредиты для следствия» — сразу обман.', src:'Совкомбанк Журнал', url:'https://journal.sovcombank.ru/zhizn/kak-moshenniki-nas-obmanivayut-realnie-istorii'},
+ {id:'tj-112', les:['l3', 'l5'], cat:'door', ym:0, saved:true, date:'рассказ читателя Т—Ж', place:'Россия', new:true, title:'«Окна по федеральной программе» и звонок 112',
+  story:'Двое молодых людей ходили по подъезду, где жили пенсионеры со старыми деревянными окнами, и представлялись сотрудниками управы: «по федеральной программе вам положена замена окон со скидкой». Соседка уже почти согласилась заплатить больше ста тысяч. Сосед, услышав разговор, позвонил в 112. Полиция приехала через десять минут и переписала данные «установщиков». Больше они в этот дом не возвращались.',
+  q:'Почему звонок в полицию так подействовал?', o:['Мошенники потеряли главное — анонимность','Полиция сразу их арестовала','Соседка передумала сама'], a:0,
+  ex:'Обманщикам нужно, чтобы их нельзя было найти. Когда их данные есть у полиции, они уходят.', src:'Т—Ж', url:'https://t-j.ru/fraud-stories-threats/'},
+ {id:'tj-sosedka', les:['l3', 'lm'], cat:'services', ym:0, saved:true, date:'рассказ читателя Т—Ж', place:'Россия', new:true, title:'«Соседка из 25-й квартиры» и голосование за камеры',
+  story:'Пожилой родственнице позвонила «соседка из 25-й квартиры»: назвала её данные и попросила код — якобы чтобы проголосовать на Госуслугах за видеокамеры в подъезде. Потом пришло СМС: «На вас оформлена доверенность, если это не вы — позвоните по номеру». По номеру из СМС ответили бы мошенники, дальше — «безопасный счёт». Родственница была предупреждена и звонить не стала.',
+  q:'Пришло СМС «на вас оформлена доверенность, позвоните по номеру». Что делать?', o:['Не звонить по номеру из СМС, а самому зайти на Госуслуги или позвонить в банк по номеру с карты','Срочно позвонить по номеру из СМС','Ответить на СМС кодом'], a:0,
+  ex:'Номер в таком СМС ведёт к мошенникам. Проверяйте только по номерам, которые нашли сами.', src:'Т—Ж', url:'https://t-j.ru/fraud-stories-bezopasnyi-schet-i-obratnyi-zvonok/'},
+ {id:'tj-brat', les:['l4'], cat:'relatives', ym:0, saved:true, date:'рассказ читателя Т—Ж', place:'Россия', new:true, title:'«Вашего сына задержали»',
+  story:'Через несколько дней после похорон в семье маме позвонили «из полиции»: сына задержали с наркотиками, даже номер машины назвали. Мама плакала и слушала. А дочь в это время позвонила брату — и дозвонилась. «Полиция» тут же бросила трубку.',
+  q:'Что быстрее всего разрушило обман?', o:['Звонок самому родственнику на его номер','Долгий разговор с «полицейским»','Перевод денег «за освобождение»'], a:0,
+  ex:'Мошенники бьют в самый тяжёлый момент. Один звонок родному всё проясняет.', src:'Т—Ж', url:'https://t-j.ru/znala-no-povelas/'},
+ {id:'tj-krik', les:['lm', 'l1'], cat:'pressure', ym:0, saved:true, date:'рассказ читателя Т—Ж', place:'Россия', new:true, title:'«Как вы посмели сбросить звонок!»',
+  story:'Пожилая женщина поняла, что звонят мошенники, и положила трубку. Они тут же перезвонили — и она снова ответила. На неё начали кричать начальственным голосом: «Как вы посмели сбрасывать звонок!» От испуга ей стало плохо. Денег она не потеряла, но после этого перестала отвечать на незнакомые номера, если рядом нет дочери.',
+  q:'Мошенник перезвонил и кричит. Как поступить?', o:['Не отвечать снова: положили трубку — и больше не берите','Ответить и извиниться','Объяснить, почему вы сбросили звонок'], a:0,
+  ex:'Крик — тоже приём: он пугает и заставляет подчиниться. Настоящие службы на граждан не кричат.', src:'Т—Ж', url:'https://t-j.ru/znala-no-povelas/'},
+ {id:'sfr-vyplata', les:['l3'], cat:'services', ym:202609, date:'сентябрь 2026', place:'Москва', new:true, title:'«Разовая выплата» ко Дню пожилого человека',
+  story:'Пенсионерам звонят «сотрудники Социального фонда» или соцзащиты: открыт приём заявлений на разовую выплату ко Дню пожилого человека, оформить можно «без визита в МФЦ». Для этого просят номер карты, код с её обратной стороны и код из СМС.',
+  q:'Как на самом деле назначают такие выплаты?', o:['Автоматически или по заявлению в МФЦ и в личном кабинете — коды и данные карты фонд не просит','По телефону, после того как назовёте код','Через курьера, которому нужно отдать карту'], a:0,
+  ex:'Услышали про выплату и коды — кладите трубку и перезвоните на горячую линию Социального фонда сами.', src:'MSK1.ru', url:'https://msk1.ru/text/incidents/2026/09/17/76646753/'},
+ {id:'yanao-sud', les:['l5', 'l2'], cat:'court', ym:202605, date:'май 2026', place:'ЯНАО', new:true, title:'Суд обязал курьера вернуть деньги',
+  story:'Пенсионер по указанию мошенников передал деньги курьеру. Суд обязал курьера вернуть всё: он понимал, что не имеет законных оснований распоряжаться чужими деньгами.',
+  q:'Чему учит эта история?', o:['Сразу писать заявление в полицию: иногда деньги удаётся вернуть через суд','Стыдиться и никому не говорить','Ждать, пока мошенники сами вернут деньги'], a:0,
+  ex:'Чем раньше заявление, тем больше шансов найти курьеров и владельцев карт и вернуть деньги.', src:'EAnews', url:'https://eanews.ru/rossiya/20260528131835/sud-obyazal-kuriera-moshennikov-vernut-dengi-pensioneru-v-yanao'},
+ {id:'kvartira-sud', les:['l2'], cat:'court', ym:202511, date:'ноябрь 2025', place:'Благовещенск', new:true, title:'Квартиру через суд не вернули',
+  story:'Пенсионерка продала квартиру, поверив мошенникам, и потребовала через суд признать сделку недействительной. Суд признал покупательницу добросовестной и оставил квартиру ей. Похожие решения выносят и другие суды.',
+  q:'Что важнее всего знать о продаже жилья «по указанию органов»?', o:['Вернуть квартиру через суд удаётся далеко не всегда — останавливаться нужно до сделки','Суд всегда возвращает квартиру','Можно продать, а потом спокойно отменить сделку'], a:0,
+  ex:'Ни один следователь не просит продавать жильё. Если об этом зашла речь — это обман, и останавливаться нужно сразу.', src:'РБК Недвижимость', url:'https://realty.rbc.ru/news/692565e99a794761a9f627af'},
+ {id:'vrl-chat', les:['lm', 'l3'], cat:'pressure', ym:202603, new:true, date:'март 2026', place:'Россия', title:'«Все уже прислали коды»',
+  story:'Врача на пенсии добавили в чат «бывших коллег по поликлинике». От имени главврача попросили пройти «сверку для перерасчёта пенсии» и прислать код. В чате «коллеги» один за другим писали, что уже отправили коды. Она молчала — тогда три дня подряд ей писали: «остались только вы, не игнорируйте». В итоге она сдалась. А в чате было всего семь участников, и все — поддельные.',
+  q:'На какой приём попалась героиня?', o:['«Так делают все» и давление днями: поддельные коллеги и «остались только вы»','Ей просто повезло меньше других','Это был настоящий чат поликлиники'], a:0,
+  ex:'Если «все уже сделали» и вас торопят — остановитесь. Код из СМС никому, даже «для перерасчёта пенсии». Позвоните бывшему коллеге или в фонд сами.', src:'ролик Ильи Варламова', url:'https://www.youtube.com/watch?v=xJ0TXr4zBTg'},
+ {id:'vrl-mikrofon', les:['lm', 'l3'], cat:'services', ym:202603, new:true, date:'март 2026', place:'Россия', title:'«Забытый микрофон» и вежливый «спаситель»',
+  story:'Женщине позвонили «насчёт замены счётчиков» и попросили данные. Потом звонящая будто бы забыла выключить микрофон, и было слышно, как она хвалится, что «клиентка на крючке». Женщина обрадовалась, что раскусила обман, и положила трубку. Через сорок минут позвонили «из портала Мои документы»: «в ваш кабинет вошли, вы кому-то что-то сообщали?» Этому вежливому «спасителю» она спокойно назвала свои данные — и только потом поняла, что это та же схема.',
+  q:'Зачем мошеннице был нужен «забытый микрофон»?', o:['Чтобы вы почувствовали себя победителем и поверили следующему «спасителю»','Она случайно ошиблась','Чтобы предупредить вас об опасности'], a:0,
+  ex:'Сначала пугают или дают «разоблачить», потом «спасают». Если что-то случилось — звоните сами, по номеру с официального сайта.', src:'ролик Ильи Варламова', url:'https://www.youtube.com/watch?v=xJ0TXr4zBTg'},
+ {id:'vrl-nochnye', les:['l5', 'l4'], cat:'relatives', ym:202603, new:true, date:'март 2026', place:'Россия', title:'Ночью дочка «спасала семью»',
+  story:'Восьмилетняя девочка играла в онлайн-игру и попала в чат. Незнакомец по видеосвязи напугал её: её родители якобы украли чужие деньги, и семье грозит беда, если она их не вернёт. Ночью девочка взяла телефоны спящих родителей и под его диктовку перевела деньги, ещё и оформила кредит. Утром она плакала и боялась рассказать: мошенник внушил ей, что преступники — это её родители.',
+  q:'Что могло бы защитить эту семью?', o:['Пароль на телефоне с банком, который ребёнок не знает, и договор: «если пугают — сразу ко мне, ругать не буду»','Запретить ребёнку все игры навсегда','Ничего: от такого не защититься'], a:0,
+  ex:'Мошенники давят на желание ребёнка спасти близких. Внукам важно знать, что с любым страшным сообщением можно прийти к взрослым.', src:'ролик Ильи Варламова', url:'https://www.youtube.com/watch?v=xJ0TXr4zBTg'}
+];
+
+const PRAISE = ['Отлично! Вас так просто не проведёшь.','Верно! Вы рассуждаете как опытный следователь.','Прекрасно! Именно так и нужно поступать.','Браво! Мошенники остались ни с чем.','Совершенно верно! Так держать.'];
+
+/* ---------- сохранение (только на этом устройстве) ---------- */
+const KEY = 'nvns60';
+let ST = {stars:0, done:{}, q:{}, calls:{}, cases:{}, fam:{}, name:'', fs:21};
+try { Object.assign(ST, JSON.parse(localStorage.getItem(KEY) || '{}')); } catch (_) {}
+function save(){ try { localStorage.setItem(KEY, JSON.stringify(ST)); } catch (_) {} }
+const $ = s => document.querySelector(s);
+const app = $('#app');
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const praise = () => PRAISE[Math.floor(Math.random() * PRAISE.length)];
+/* случайный порядок вариантов, чтобы правильный ответ не стоял всегда на одном месте */
+function mix(n){ const a = Array.from({length: n}, (_, i) => i); for (let i = n - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function toast(t){ const el = $('#toast'); el.textContent = t; el.hidden = false; clearTimeout(toast.h); toast.h = setTimeout(() => { el.hidden = true; }, 2600); }
+function star(n){ ST.stars += n; save(); renderSide(); toast(`+${n} ${n === 1 ? 'звезда' : 'звезды'} бдительности`); }
+function starsPill(){ return `<span class="stars">${IC.star} ${ST.stars}</span>`; }
+
+/* ---------- озвучка ---------- */
+const TTS = 'speechSynthesis' in window;
+function voice(){ try { return speechSynthesis.getVoices().find(v => /^ru/i.test(v.lang)); } catch (_) { return null; } }
+function say(text, onend){
+  if (!TTS) { if (onend) setTimeout(onend, Math.max(5000, text.length * 70)); return; }
+  try { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(text); u.lang = 'ru-RU'; u.rate = .92; const v = voice(); if (v) u.voice = v; if (onend) u.onend = onend; speechSynthesis.speak(u); }
+  catch (_) { if (onend) setTimeout(onend, Math.max(5000, text.length * 70)); }
+}
+function hush(){ try { if (TTS) speechSynthesis.cancel(); } catch (_) {} spkStop(); }
+/* «Прочитать вслух»: сначала записи голоса автора (если есть), иначе синтез браузера. Повторное нажатие — пауза, ещё раз — продолжить */
+const AUDIO_DIR = 'audio/';
+function speakBtn(text, clips){ return `<button class="btn ghost" type="button" data-say="${esc(text)}" ${clips && clips.length ? `data-clips="${esc(clips.join('|'))}"` : ''}>${IC.speak} Прочитать вслух</button>`; }
+function bindSpeak(){ app.querySelectorAll('[data-say]').forEach(b => b.onclick = () => spkToggle(b)); }
+const SPK = {btn: null, audio: null, list: [], i: 0, state: 'idle', tts: false};
+function spkLabel(b, st){ if (b) b.innerHTML = st === 'play' ? `${IC.pause} Пауза` : st === 'paused' ? `${IC.play} Продолжить` : `${IC.speak} Прочитать вслух`; }
+function spkStop(){
+  if (SPK.audio) { try { SPK.audio.pause(); } catch (_) {} SPK.audio.onended = SPK.audio.onerror = null; SPK.audio = null; }
+  if (SPK.tts) { try { speechSynthesis.cancel(); } catch (_) {} }
+  spkLabel(SPK.btn, 'idle'); SPK.btn = null; SPK.state = 'idle'; SPK.tts = false;
+}
+function spkDone(){ spkLabel(SPK.btn, 'idle'); SPK.btn = null; SPK.audio = null; SPK.state = 'idle'; SPK.tts = false; }
+function spkTts(text){
+  SPK.tts = true;
+  if (!TTS) { spkDone(); toast('Озвучка недоступна на этом устройстве'); return; }
+  try { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(text); u.lang = 'ru-RU'; u.rate = .92; const v = voice(); if (v) u.voice = v;
+    const me = SPK.btn; u.onend = () => { if (SPK.btn === me && SPK.state === 'play') spkDone(); }; speechSynthesis.speak(u); } catch (_) { spkDone(); }
+}
+function spkNext(){
+  if (SPK.i >= SPK.list.length) { spkDone(); return; }
+  const a = new Audio(AUDIO_DIR + SPK.list[SPK.i]); SPK.audio = a;
+  a.onended = () => { SPK.i++; spkNext(); };
+  a.onerror = () => { const text = SPK.btn ? SPK.btn.dataset.say : ''; SPK.audio = null; spkTts(text); };  // нет записи — читаем синтезом
+  try { const pr = a.play(); if (pr && pr.catch) pr.catch(() => a.onerror && a.onerror()); } catch (_) { a.onerror(); }
+}
+function spkToggle(b){
+  if (SPK.btn === b && SPK.state === 'play') {
+    if (SPK.audio) SPK.audio.pause(); else try { speechSynthesis.pause(); } catch (_) {}
+    SPK.state = 'paused'; spkLabel(b, 'paused'); return;
+  }
+  if (SPK.btn === b && SPK.state === 'paused') {
+    if (SPK.audio) { try { const pr = SPK.audio.play(); if (pr && pr.catch) pr.catch(() => {}); } catch (_) {} } else try { speechSynthesis.resume(); } catch (_) {}
+    SPK.state = 'play'; spkLabel(b, 'play'); return;
+  }
+  hush();
+  SPK.btn = b; SPK.state = 'play'; spkLabel(b, 'play');
+  const clips = b.dataset.clips ? b.dataset.clips.split('|') : [];
+  if (clips.length) { SPK.list = clips; SPK.i = 0; spkNext(); } else spkTts(b.dataset.say);
+}
+
+/* ---------- шрифт ---------- */
+function applyFs(){ document.documentElement.style.setProperty('--fs', ST.fs + 'px'); }
+$('#fs-plus').onclick = () => { ST.fs = Math.min(28, ST.fs + 2); applyFs(); save(); };
+$('#fs-minus').onclick = () => { ST.fs = Math.max(17, ST.fs - 2); applyFs(); save(); };
+$('#home-link').onclick = () => go('');
+$('#home-link').onkeydown = e => { if (e.key === 'Enter') go(''); };
+applyFs();
+
+/* ---------- главная ---------- */
+function home(){
+  hush();
+  const n = LESSONS.filter(l => ST.done[l.id]).length;
+  const nextL = LESSONS.find(l => !ST.done[l.id]);
+  const fresh = CASES.filter(c => c.new && !ST.cases[c.id]).length;
+  const askName = !(ST.name || '').trim() && !ST.skipName;
+  app.innerHTML = `
+  ${askName ? `<section class="card" id="name-card">
+    <h2>Как к вам обращаться?</h2>
+    <p>Впишите имя и отчество. В тренажёрах «мошенники» будут звать вас по имени — как в жизни. Это же имя появится в свидетельстве. Имя хранится только на этом устройстве.</p>
+    <label class="field" for="nm0">Имя и отчество<input id="nm0" type="text" maxlength="40" autocomplete="name" placeholder="Например: Галина Ивановна"></label>
+    <div class="row"><button class="btn" type="button" id="nm-save">Сохранить</button><button class="btn ghost" type="button" id="nm-skip">Не сейчас</button></div>
+  </section>` : ''}
+  <section class="card">
+    <p class="eyebrow">Курс для старшего поколения</p>
+    <h1>Как не попасться мошенникам</h1>
+    <p class="lead">${LESSONS.length} коротких уроков: видео на 2–3 минуты, вопросы и тренировка «звонок мошенника». А ещё реальные истории из новостей — новые каждую неделю.</p>
+    <div class="row" style="align-items:center"><p><b>Пройдено уроков: ${n} из ${LESSONS.length}</b></p><p style="flex:0 0 auto">${starsPill()}</p></div>
+    ${nextL ? `<button class="btn" type="button" data-go="${nextL.id}">${IC.play} ${n ? 'Продолжить: ' : 'Начать: '}${esc(nextL.title)}</button>` : `<button class="btn" type="button" data-go="cert">${IC.star} Получить свидетельство</button>`}
+  </section>
+  <section class="stack">
+    <h2>Уроки</h2>
+    ${LESSONS.map((l, i) => `<button class="lesson ${ST.done[l.id] ? 'done' : ''}" type="button" data-go="${l.id}"><span class="num">${ST.done[l.id] ? '✓' : i + 1}</span><span class="t"><b>${esc(l.title)}</b><span>${esc(l.sub)}</span></span></button>`).join('')}
+  </section>
+  <section class="card">
+    <h2>Реальные истории</h2>
+    <p>Тренировка на настоящих случаях из новостей. Чем больше историй вы разберёте, тем быстрее узнаете мошенника.</p>
+    <p>${fresh ? `<span class="tag">Новых историй: ${fresh}</span>` : '<span class="tag ok">Все истории разобраны</span>'} <span class="meta">Обновлено ${esc(fmtDate(CASES_UPDATED))}</span></p>
+    <button class="btn ghost" type="button" data-go="cases">Разобрать истории</button>
+  </section>`;
+  bindGo();
+  if (askName) {
+    $('#nm-save').onclick = () => { const v = $('#nm0').value.trim(); if (!v) { $('#nm0').focus(); toast('Впишите имя или нажмите «Не сейчас»'); return; } ST.name = v; save(); toast('Приятно познакомиться, ' + v + '!'); home(); };
+    $('#nm-skip').onclick = () => { ST.skipName = 1; save(); home(); };
+    $('#nm0').onkeydown = e => { if (e.key === 'Enter') $('#nm-save').click(); };
+  }
+}
+function fmtDate(iso){ try { return new Date(iso).toLocaleDateString('ru-RU', {day:'numeric', month:'long'}); } catch (_) { return iso; } }
+function bindGo(){ app.querySelectorAll('[data-go]').forEach(b => b.onclick = () => go(b.dataset.go)); }
+function go(where){ try { history.replaceState(null, '', where ? '#' + where : location.pathname); } catch (_) {} routeNav(where || ''); window.scrollTo(0, 0); }
+
+/* ---------- урок: видео → вопросы → звонок → итог ---------- */
+const STEP_NAMES = ['Видео', 'Вопросы', 'Практика', 'Итог'];
+/* шаги урока — можно перейти на любой: пропустить видео, вернуться к нему после вопросов */
+let CUR_L = null;
+function stepsBar(i){ return `<nav class="prog" aria-label="Шаги урока: сейчас ${i + 1} из ${STEP_NAMES.length}, ${STEP_NAMES[i]}">${STEP_NAMES.map((s, k) => `<button type="button" class="seg ${k < i ? 'done' : k === i ? 'on' : ''}" data-step="${k}" ${k === i ? 'aria-current="step"' : ''}><i></i><span>${k < i ? '<b class="ck">✓ </b>' : ''}${s}</span></button>`).join('')}</nav><p class="hint">Можно нажать на любой шаг: например, сразу перейти к вопросам или вернуться к видео.</p>`; }
+function goStep(k){
+  const L = CUR_L; if (!L) return;
+  hush();
+  if (k === 0) video(L); else if (k === 1) quiz(L, 0); else if (k === 2) (L.family ? family(L) : call(L)); else finish(L);
+  window.scrollTo(0, 0);
+}
+app.addEventListener('click', e => { const b = e.target.closest('[data-step]'); if (b && !b.classList.contains('on')) goStep(+b.dataset.step); });
+function lessonHead(L, i){ CUR_L = L; return `<div class="head"><div class="crumbs"><button class="back" type="button" data-go="">← Все уроки</button><span class="sep" aria-hidden="true"></span><p class="eyebrow">Урок ${LESSONS.indexOf(L) + 1} из ${LESSONS.length}</p></div><h1>${esc(L.title)}</h1>${stepsBar(i)}</div>`; }
+
+function video(L){
+  hush();
+  /* Настоящий ролик (когда появится): L.mp4 — путь к файлу, L.poster — картинка-обложка */
+  if (L.mp4) {
+    app.innerHTML = `${lessonHead(L, 0)}
+    <div class="stack"><section class="screen real"><video src="${esc(L.mp4)}" ${L.poster ? `poster="${esc(L.poster)}"` : ''} controls playsinline preload="metadata"></video></section>
+    <p class="meta">Нажмите ▶ в центре видео. Звук можно сделать громче кнопками на телефоне.</p></div>
+    <button class="btn" type="button" id="v-done">К вопросам →</button>`;
+    bindGo(); $('#v-done').onclick = () => quiz(L, 0); return;
+  }
+  let k = 0, playing = false, started = false, seen = false;
+  const N = L.video.length;
+  const ICP = {
+    prev:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5v14M19 5 9 12l10 7z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>',
+    next:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 5v14M5 5l10 7-10 7z" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>'};
+  const paint = () => {
+    const [ic, text] = L.video[k];
+    if (k === N - 1) seen = true;
+    app.innerHTML = `${lessonHead(L, 0)}
+    <div class="stack">
+    <section class="screen player" aria-label="Видеосюжет">
+      <div class="stage" id="v-stage">
+        <div class="pic">${IC[ic]}</div>
+        <p class="cap">${esc(text)}</p>
+      </div>
+      <div class="ctrl">
+        <button type="button" id="v-prev" aria-label="Предыдущий кадр" ${k ? '' : 'disabled'}>${ICP.prev}</button>
+        <button type="button" class="main" id="v-play" aria-label="${playing ? 'Пауза' : 'Смотреть'}">${playing ? IC.pause : IC.play}</button>
+        <button type="button" id="v-next" aria-label="Следующий кадр" ${k < N - 1 ? '' : 'disabled'}>${ICP.next}</button>
+        <div class="bar" aria-hidden="true"><i style="width:${(k + 1) / N * 100}%"></i></div>
+        <span class="t">${k + 1} / ${N}</span>
+      </div>
+      ${started ? '' : `<button type="button" class="bigplay" id="v-big"><span class="c">${IC.play}</span><span class="l">Смотреть со звуком</span><span class="d">${N} кадров · около ${Math.max(1, Math.round(N * 20 / 60))} мин</span></button>`}
+    </section>
+    ${TTS ? '' : '<p class="meta">Озвучка недоступна на этом устройстве — читайте текст на экране.</p>'}
+    </div>
+    ${seen ? '<button class="btn" type="button" id="v-done">К вопросам →</button>' : ''}`;
+    bindGo();
+    const toggle = () => { started = true; playing = !playing; if (playing) speakNow(); else hush(); paint(); };
+    $('#v-play').onclick = toggle;
+    $('#v-stage').onclick = toggle;
+    const big = $('#v-big'); if (big) big.onclick = toggle;
+    $('#v-prev').onclick = () => { started = true; k = Math.max(0, k - 1); if (playing) speakNow(); paint(); };
+    $('#v-next').onclick = () => { started = true; k = Math.min(N - 1, k + 1); if (playing) speakNow(); paint(); };
+    const dn = $('#v-done'); if (dn) dn.onclick = () => { hush(); quiz(L, 0); };
+  };
+  const speakNow = () => { const here = k; say(L.video[k][1], () => { if (!playing || here !== k) return; if (k < N - 1) { k++; paint(); speakNow(); } else { playing = false; paint(); } }); };
+  paint();
+}
+
+function quiz(L, qi){
+  hush();
+  const Q = L.quiz[qi], key = L.id + ':' + qi, order = mix(Q.o.length);
+  app.innerHTML = `${lessonHead(L, 1)}
+  <section class="card">
+    <p class="eyebrow">Вопрос ${qi + 1} из ${L.quiz.length}</p>
+    <h2>${esc(Q.q)}</h2>
+    ${speakBtn(Q.q + '. Варианты: ' + order.map(j => Q.o[j]).join('. '), [`q-${L.id}-${qi}.mp3`, 'variants.mp3', ...order.map(j => `q-${L.id}-${qi}-o${j}.mp3`)])}
+    <div class="opts">${order.map(j => `<button class="opt" type="button" data-j="${j}">${esc(Q.o[j])}</button>`).join('')}</div>
+    <div id="fb"></div>
+  </section>`;
+  bindSpeak(); bindGo();
+  app.querySelectorAll('.opt').forEach(b => b.onclick = () => {
+    const j = +b.dataset.j, ok = j === Q.a;
+    app.querySelectorAll('.opt').forEach(x => { x.disabled = true; if (+x.dataset.j === Q.a) x.classList.add('right'); });
+    if (!ok) b.classList.add('wrong');
+    if (ok && !ST.q[key]) { ST.q[key] = 1; star(1); }
+    hush();
+    $('#fb').innerHTML = `<div class="fb ${ok ? 'good' : 'bad'}"><b>${ok ? esc(praise()) : 'Не совсем. Правильный ответ отмечен зелёным.'}</b><p>${esc(Q.ex)}</p>${speakBtn(Q.ex, [`q-${L.id}-${qi}-ex.mp3`])}</div>
+      <button class="btn" type="button" id="q-next">${qi < L.quiz.length - 1 ? 'Следующий вопрос →' : (L.family ? 'К семейному договору →' : 'К тренировке «звонок» →')}</button>`;
+    bindSpeak();
+    $('#q-next').onclick = () => qi < L.quiz.length - 1 ? quiz(L, qi + 1) : (L.family ? family(L) : call(L));
+    $('#q-next').focus();
+  });
+}
+
+function call(L){
+  hush();
+  const C = L.call;
+  app.innerHTML = `${lessonHead(L, 2)}
+  <p class="lead">Представьте, что звонит телефон. Решите, что будете делать.</p>
+  ${(ST.name || '').trim() ? '' : '<p class="meta" style="text-align:left">Совет: впишите на главной странице, как к вам обращаться, — и «мошенник» будет называть вас по имени, как в жизни.</p>'}
+  <section class="phone" aria-label="Тренажёр звонка">
+    <div class="who"><span>Входящий звонок</span><b>${esc(C.who)}</b><span>${esc(C.num)}</span></div>
+    <div class="ring"><button class="yes" type="button" id="c-yes">Ответить</button><button class="no" type="button" id="c-no">Не отвечать</button></div>
+  </section>`;
+  bindGo();
+  $('#c-yes').onclick = () => node(L, C.start);
+  $('#c-no').onclick = () => {
+    app.querySelector('.phone').innerHTML = `<div class="end">${IC.shield}<p style="font-size:1.1rem">Не отвечать на незнакомые номера — хорошая привычка. Но давайте послушаем, что говорят мошенники, чтобы узнать их в следующий раз.</p><button class="btn" type="button" id="c-listen">Послушать звонок</button></div>`;
+    $('#c-listen').onclick = () => node(L, C.start);
+  };
+}
+/* «мошенник» называет пользователя по имени — так видно, что знание ваших данных ничего не доказывает */
+const userName = () => (ST.name || '').trim() || 'Галина Ивановна';
+const withName = t => t.replace(/\{name\}/g, userName());
+function node(L, id){
+  const N0 = L.call.nodes[id];
+  const N = N0.end ? N0 : Object.assign({}, N0, {say: N0.say.map(withName)});
+  if (N.end) return callEnd(L, N);
+  const ph = app.querySelector('.phone');
+  ph.innerHTML = `<div class="who"><span>Идёт разговор</span><b>${esc(L.call.who)}</b></div>
+    ${N.say.map(s => `<p class="bubble">${esc(s)}</p>`).join('')}
+    ${speakBtn(N.say.join(' '))}
+    <p style="text-align:center;font-weight:700">Что вы сделаете?</p>
+    <div class="opts">${mix(N.ch.length).map(k => `<button class="opt" type="button" data-to="${N.ch[k][1]}">${esc(N.ch[k][0])}</button>`).join('')}</div>`;
+  bindSpeak();
+  ph.querySelectorAll('[data-to]').forEach(b => b.onclick = () => { hush(); node(L, b.dataset.to); });
+  say(N.say.join(' '));
+}
+function callEnd(L, N){
+  hush();
+  const good = N.end === 'good';
+  if (good && !ST.calls[L.id]) { ST.calls[L.id] = 1; star(2); }
+  app.querySelector('.phone').outerHTML = `<section class="card end">
+    ${good ? IC.shield : `<span style="color:var(--alarm)">${IC.warn}</span>`}
+    <h2>${good ? esc(praise()) : 'Так и обманывают'}</h2>
+    <p style="font-size:1.1rem">${esc(N.text)}</p>
+    ${good ? '' : '<button class="btn ghost" type="button" id="c-again">Попробовать ещё раз</button>'}
+    <button class="btn" type="button" id="c-fin">Итог урока →</button>
+  </section>`;
+  const ag = $('#c-again'); if (ag) ag.onclick = () => call(L);
+  $('#c-fin').onclick = () => finish(L);
+}
+
+function family(L){
+  hush();
+  const all = FAMILY.length, got = FAMILY.filter((_, i) => ST.fam[i]).length;
+  const link = 'https://moteam-design.github.io/ne-ver-60/';
+  const invite = `Я прохожу курс «Не верь на слово» о защите от мошенников. Давай вместе обсудим наш семейный договор: кодовое слово, кому звонить, если что-то случилось, и самозапрет на кредиты. Курс здесь: ${link}`;
+  app.innerHTML = `${lessonHead(L, 2)}
+  <section class="card">
+    <h2>Семейный договор безопасности</h2>
+    <p>Позвоните родным или пригласите их в гости и пройдитесь по списку вместе. Отмечайте то, о чём договорились. За каждый пункт — звезда.</p>
+    <div>${FAMILY.map(([t, s], i) => `<label class="check" for="f${i}"><input type="checkbox" id="f${i}" data-i="${i}" ${ST.fam[i] ? 'checked' : ''}><span><b>${esc(t)}</b><small>${esc(s)}</small></span></label>`).join('')}</div>
+    <p><b>Отмечено: <span id="fam-n">${got}</span> из ${all}</b></p>
+  </section>
+  <section class="card">
+    <h2>Пригласите родных</h2>
+    <p>Скопируйте это сообщение и отправьте детям или внукам в мессенджер.</p>
+    <textarea class="copybox" id="inv" readonly>${esc(invite)}</textarea>
+    <button class="btn ghost" type="button" id="copy">Скопировать сообщение</button>
+  </section>
+  <button class="btn" type="button" id="fam-fin">Итог урока →</button>`;
+  bindGo();
+  app.querySelectorAll('.check input').forEach(c => c.onchange = () => {
+    const i = +c.dataset.i;
+    if (c.checked && !ST.fam[i]) { ST.fam[i] = 1; star(1); } else if (!c.checked) { delete ST.fam[i]; save(); }
+    $('#fam-n').textContent = FAMILY.filter((_, k) => ST.fam[k]).length;
+  });
+  $('#copy').onclick = () => {
+    const ta = $('#inv');
+    try { navigator.clipboard.writeText(ta.value).then(() => toast('Скопировано. Вставьте в сообщение родным'), () => { ta.select(); toast('Выделите текст и скопируйте'); }); }
+    catch (_) { ta.select(); toast('Выделите текст и скопируйте'); }
+  };
+  $('#fam-fin').onclick = () => finish(L);
+}
+
+function finish(L){
+  hush();
+  const first = !ST.done[L.id];
+  if (first) { ST.done[L.id] = 1; star(1); }
+  if (first && allDone()) { try { history.replaceState(null, '', '#cert'); } catch (_) {} return congrats(); }
+  const i = LESSONS.indexOf(L), nx = LESSONS.find((l, k) => k > LESSONS.indexOf(L) && !ST.done[l.id]) || LESSONS.find(l => !ST.done[l.id]);
+  app.innerHTML = `${lessonHead(L, 3)}
+  <section class="card end">
+    ${IC.shield}
+    <h2>Урок пройден!</h2>
+    <p class="lead">Вы молодец. Каждый пройденный урок делает вас сильнее мошенников.</p>
+    <p>${starsPill()}</p>
+  </section>
+  <section class="card"><p class="eyebrow">Главное правило урока</p><p class="rule">${esc(L.rule)}</p>${speakBtn(L.rule)}</section>
+  ${L.memo ? `<section class="card"><p class="eyebrow">Памятка</p><h2>${esc(L.memoTitle || 'Как на самом деле действуют полиция, следователь и банк')}</h2><ul class="memo">${L.memo.map(m => `<li>${esc(m)}</li>`).join('')}</ul>${speakBtn(L.memo.join(' '))}</section>` : ''}
+  <div class="actions">${nx ? `<button class="btn" type="button" data-go="${nx.id}">Следующий урок: ${esc(nx.title)} →</button>` : '<button class="btn" type="button" data-go="cert">Получить свидетельство →</button>'}
+  </div>
+  ${casesFor(L, 3).length ? `<section class="stack"><h2>Реальные истории по теме урока</h2><p class="lead">Разберите их — так легче узнать мошенника в жизни.</p>${casesFor(L, 3).map(caseCard).join('')}<button class="btn ghost" type="button" data-go="cases">Все реальные истории (${CASES.length})</button></section>` : '<button class="btn ghost" type="button" data-go="cases">Разобрать реальные истории</button>'}`;
+  bindGo(); bindSpeak();
+  app.querySelectorAll('[data-case]').forEach(b => b.onclick = () => oneCase(b.dataset.case));
+}
+
+/* ---------- реальные истории ---------- */
+function cases(){
+  hush();
+  app.innerHTML = `<button class="back" type="button" data-go="">← На главную</button>
+  <div class="head"><h1>Реальные истории</h1>
+  <p class="lead">Случаи из новостей. В каждом — один вопрос: что здесь главное? Новые истории появляются каждую неделю.</p>
+  <p class="meta" style="text-align:left">Обновлено ${esc(fmtDate(CASES_UPDATED))} · Разобрано ${CASES.filter(c => ST.cases[c.id]).length} из ${CASES.length}</p></div>
+  <nav class="chips" aria-label="Виды обмана">${CASE_CATS.filter(([k]) => CASES.some(c => caseCat(c) === k)).map(([k, t, sh]) => `<a href="#" data-jump="cat-${k}">${esc(sh)} <span>${CASES.filter(c => caseCat(c) === k).length}</span></a>`).join('')}</nav>
+  ${CASE_CATS.filter(([k]) => CASES.some(c => caseCat(c) === k)).map(([k, t]) => `<section class="stack" id="cat-${k}"><h2>${esc(t)}</h2>${CASES.filter(c => caseCat(c) === k).sort((a, b) => (b.ym || 0) - (a.ym || 0)).map(caseCard).join('')}</section>`).join('')}`;
+  app.querySelectorAll('[data-jump]').forEach(a => a.onclick = e => { e.preventDefault(); const el = document.getElementById(a.dataset.jump); if (el) el.scrollIntoView({behavior: 'smooth', block: 'start'}); });
+  bindGo();
+  app.querySelectorAll('[data-case]').forEach(b => b.onclick = () => oneCase(b.dataset.case));
+}
+function oneCase(id){
+  hush();
+  const i = CASES.findIndex(c => c.id === id), c = CASES[i], nx = CASES[i + 1];
+  app.innerHTML = `<button class="back" type="button" id="back-cases">← Все истории</button>
+  <div class="head"><p class="eyebrow">${esc(c.place)} · ${esc(c.date)}</p>
+  <h1>${esc(c.title)}</h1></div>
+  <section class="card"><p class="story">${esc(c.story)}</p>${speakBtn(c.story)}<p class="src">Источник: <a href="${esc(c.url)}" target="_blank" rel="noopener">${esc(c.src)}</a></p></section>
+  <section class="card"><h2>${esc(c.q)}</h2><div class="opts">${mix(c.o.length).map(j => `<button class="opt" type="button" data-j="${j}">${esc(c.o[j])}</button>`).join('')}</div><div id="fb"></div></section>`;
+  bindSpeak();
+  $('#back-cases').onclick = () => go('cases');
+  app.querySelectorAll('.opt').forEach(b => b.onclick = () => {
+    const ok = +b.dataset.j === c.a;
+    app.querySelectorAll('.opt').forEach(x => { x.disabled = true; if (+x.dataset.j === c.a) x.classList.add('right'); });
+    if (!ok) b.classList.add('wrong');
+    if (!ST.cases[c.id]) { ST.cases[c.id] = 1; if (ok) star(1); else { save(); renderSide(); } }
+    $('#fb').innerHTML = `<div class="fb ${ok ? 'good' : 'bad'}"><b>${ok ? esc(praise()) : 'Не совсем. Правильный ответ отмечен зелёным.'}</b><p>${esc(c.ex)}</p></div>
+      ${nx ? '<button class="btn" type="button" id="n-case">Следующая история →</button>' : '<button class="btn" type="button" id="n-case">Все истории разобраны — на главную</button>'}`;
+    $('#n-case').onclick = () => nx ? oneCase(nx.id) : go('');
+  });
+}
+
+/* ---------- панель уроков ---------- */
+let NAV = '';
+const allDone = () => LESSONS.every(l => ST.done[l.id]);
+function renderSide(cur){
+  if (cur != null) NAV = cur;
+  const side = $('#side'); if (!side) return;
+  const n = LESSONS.filter(l => ST.done[l.id]).length, fresh = CASES.filter(c => c.new && !ST.cases[c.id]).length, all = allDone();
+  side.innerHTML = `<button class="sbtn close" id="side-x" type="button">✕ Закрыть</button>
+  <div class="sprog"><p class="eyebrow">Ваш прогресс</p>
+    <div class="r"><b>Пройдено ${n} из ${LESSONS.length}</b>${starsPill()}</div>
+    <div class="pbar" aria-hidden="true"><i style="width:${n / LESSONS.length * 100}%"></i></div></div>
+  <ul class="nav">
+    <li><button type="button" data-nav="" ${NAV === '' ? 'aria-current="page"' : ''}><span class="n">${IC.home}</span><span class="t2">Главная</span></button></li>
+    ${LESSONS.map((l, i) => `<li class="${ST.done[l.id] ? 'done' : ''}"><button type="button" data-nav="${l.id}" ${NAV === l.id ? 'aria-current="page"' : ''}><span class="n">${ST.done[l.id] ? '✓' : i + 1}</span><span class="t2">${esc(l.title)}${ST.done[l.id] ? '<small>Пройден</small>' : ''}</span></button></li>`).join('')}
+  </ul>
+  <hr>
+  <ul class="nav">
+    <li><button type="button" data-nav="cases" ${NAV === 'cases' ? 'aria-current="page"' : ''}><span class="n">${IC.badge}</span><span class="t2">Реальные истории${fresh ? `<small>Новых: ${fresh}</small>` : ''}</span></button></li>
+    <li class="${all ? 'done' : 'lock'}"><button type="button" data-nav="cert" ${NAV === 'cert' ? 'aria-current="page"' : ''}><span class="n">${IC.star}</span><span class="t2">Свидетельство<small>${all ? 'Курс пройден!' : 'Откроется после всех уроков'}</small></span></button></li>
+  </ul>`;
+  side.querySelectorAll('[data-nav]').forEach(b => b.onclick = () => { closeSide(); go(b.dataset.nav); });
+  $('#side-x').onclick = closeSide;
+}
+function openSide(){ $('#side').classList.add('open'); $('#backdrop').hidden = false; $('#menu').setAttribute('aria-expanded', 'true'); const x = $('#side-x'); if (x) x.focus(); }
+function closeSide(){ const sd = $('#side'); if (!sd.classList.contains('open')) return; sd.classList.remove('open'); $('#backdrop').hidden = true; $('#menu').setAttribute('aria-expanded', 'false'); $('#menu').focus(); }
+
+/* ---------- курс пройден: поздравление и свидетельство ---------- */
+function confetti(){
+  try { if (matchMedia('(prefers-reduced-motion: reduce)').matches) return; } catch (_) {}
+  const box = document.createElement('div'); box.className = 'confetti'; box.setAttribute('aria-hidden', 'true');
+  const colors = ['var(--safe)', 'var(--gold)', 'var(--alarm)', '#4C8DF6', 'var(--safe-soft)'];
+  box.innerHTML = Array.from({length: 70}, (_, i) => `<i style="left:${Math.random() * 100}%;background:${colors[i % colors.length]};animation-delay:${Math.random() * 1.2}s;transform:rotate(${Math.random() * 180}deg)"></i>`).join('');
+  document.body.appendChild(box); setTimeout(() => box.remove(), 5000);
+}
+const gradDate = () => new Date(ST.grad || Date.now()).toLocaleDateString('ru-RU', {day:'numeric', month:'long', year:'numeric'});
+function cert(){
+  hush();
+  const n = LESSONS.filter(l => ST.done[l.id]).length;
+  if (n < LESSONS.length) {
+    const nx = LESSONS.find(l => !ST.done[l.id]);
+    app.innerHTML = `<section class="card end">${IC.star.replace('<svg', '<svg style="width:72px;height:72px;color:var(--gold)"')}<h2>Свидетельство ждёт вас</h2><p class="lead">Оно откроется, когда вы пройдёте все уроки. Сейчас пройдено ${n} из ${LESSONS.length}.</p><button class="btn" type="button" data-go="${nx.id}">${IC.play} Продолжить: ${esc(nx.title)}</button></section>`;
+    bindGo(); return;
+  }
+  congrats();
+}
+function congrats(){
+  hush(); renderSide('cert');
+  const first = !ST.grad;
+  if (first) { ST.grad = new Date().toISOString(); save(); }
+  const calls = Object.keys(ST.calls).length, cs = Object.keys(ST.cases).length;
+  const link = 'https://moteam-design.github.io/ne-ver-60/';
+  const share = `Курс «Не верь на слово» пройден! Теперь я знаю, как распознать мошенников и что делать, если звонят «из банка» или «из полиции». Пройдите и вы — это бесплатно: ${link}`;
+  app.innerHTML = `
+  <section class="hero-done">
+    <div class="medal">${IC.shield}</div>
+    <p class="eyebrow">Курс пройден</p>
+    <h1>Поздравляем! Вы прошли весь курс</h1>
+    <p class="lead">Теперь вы знаете приёмы мошенников и умеете вовремя положить трубку. Это защищает и вас, и ваших близких.</p>
+  </section>
+  <div class="tiles">
+    <div class="tile"><b>${LESSONS.length}</b><span>уроков пройдено</span></div>
+    <div class="tile gold"><b>${ST.stars}</b><span>звёзд бдительности</span></div>
+    <div class="tile"><b>${calls}</b><span>звонков мошенников распознано</span></div>
+    <div class="tile"><b>${cs}</b><span>реальных историй разобрано</span></div>
+  </div>
+  <section class="card"><h2>Ваши главные правила</h2>
+    <ol class="rules">${LESSONS.map(l => `<li>${esc(l.rule)}</li>`).join('')}</ol>
+    ${speakBtn(LESSONS.map(l => l.rule).join(' '))}</section>
+  <section class="stack" id="cert-sec">
+    <h2>Ваше свидетельство</h2>
+    <label class="field" for="nm">Впишите имя — оно появится в свидетельстве<input id="nm" type="text" maxlength="40" autocomplete="name" value="${esc(ST.name)}" placeholder="Например: Галина Ивановна"></label>
+    <section class="cert">
+      ${IC.shield.replace('<svg', '<svg style="width:72px;height:72px;margin:0 auto"')}
+      <p class="eyebrow">Свидетельство о прохождении курса</p>
+      <p class="ct">«Не верь на слово»</p>
+      <p class="small">Защита от мошенников · 60+</p>
+      <p class="small">выдано</p>
+      <p class="nm" id="nm-out">${esc(ST.name || 'Ваше имя')}</p>
+      <p>за успешное прохождение всех ${LESSONS.length} уроков курса</p>
+      <div class="cfoot"><span>${esc(gradDate())}</span><span>Звёзд бдительности: ${ST.stars}</span></div>
+    </section>
+    <button class="btn" type="button" id="dl">Скачать свидетельство (картинка)</button>
+    <p class="meta">Или просто сфотографируйте экран и покажите родным.</p>
+  </section>
+  <section class="card"><h2>Расскажите родным и друзьям</h2>
+    <p>Мошенники звонят всем. Отправьте это сообщение тем, кого хотите защитить.</p>
+    <textarea class="copybox" id="inv" readonly>${esc(share)}</textarea>
+    <button class="btn ghost" type="button" id="copy">Скопировать сообщение</button></section>
+  <div class="actions"><button class="btn ghost" type="button" data-go="cases">Тренироваться дальше на новых историях</button></div>`;
+  bindGo(); bindSpeak();
+  $('#nm').oninput = e => { ST.name = e.target.value; save(); $('#nm-out').textContent = ST.name || 'Ваше имя'; };
+  $('#copy').onclick = () => { const ta = $('#inv');
+    try { navigator.clipboard.writeText(ta.value).then(() => toast('Скопировано. Вставьте в сообщение'), () => { ta.select(); toast('Выделите текст и скопируйте'); }); }
+    catch (_) { ta.select(); toast('Выделите текст и скопируйте'); } };
+  $('#dl').onclick = async () => {
+    if (!ST.name.trim()) { $('#nm').focus(); toast('Сначала впишите имя'); return; }
+    try { const a = document.createElement('a'); a.href = await certPng(); a.download = 'Свидетельство - Не верь на слово.png'; document.body.appendChild(a); a.click(); a.remove(); toast('Свидетельство сохраняется в папку «Загрузки»'); }
+    catch (_) { toast('Не получилось сохранить — сфотографируйте экран'); }
+  };
+  if (first) confetti();
+}
+async function certPng(){
+  try { await Promise.all(['700 80px Literata', '600 30px "Golos Text"', '400 30px "Golos Text"'].map(f => document.fonts.load(f))); } catch (_) {}
+  const W = 1754, H = 1240, c = document.createElement('canvas'); c.width = W; c.height = H;
+  const x = c.getContext('2d'), SERIF = 'Literata, Georgia, serif', SANS = '"Golos Text", Arial, sans-serif';
+  x.fillStyle = '#FFFDF6'; x.fillRect(0, 0, W, H);
+  x.strokeStyle = '#9A6A00'; x.lineWidth = 10; x.strokeRect(50, 50, W - 100, H - 100); x.lineWidth = 3; x.strokeRect(80, 80, W - 160, H - 160);
+  x.save(); x.translate(W / 2 - 60, 140); x.scale(2.5, 2.5);
+  x.fillStyle = '#0E6B4F'; x.fill(new Path2D('M24 4 L40 10 V22 C40 33 33 41 24 44 C15 41 8 33 8 22 V10 Z'));
+  x.strokeStyle = '#FFFFFF'; x.lineWidth = 4; x.lineCap = 'round'; x.lineJoin = 'round'; x.stroke(new Path2D('M16 24 L22 30 L33 18')); x.restore();
+  x.textAlign = 'center';
+  x.fillStyle = '#4A5866'; x.font = `600 30px ${SANS}`; x.fillText('СВИДЕТЕЛЬСТВО О ПРОХОЖДЕНИИ КУРСА', W / 2, 340);
+  x.fillStyle = '#14212E'; x.font = `700 84px ${SERIF}`; x.fillText('«Не верь на слово»', W / 2, 450);
+  x.fillStyle = '#4A5866'; x.font = `400 34px ${SANS}`; x.fillText('Защита от мошенников · 60+', W / 2, 510);
+  x.font = `400 30px ${SANS}`; x.fillText('выдано', W / 2, 615);
+  const name = ST.name.trim(); let fs = 96;
+  do { x.font = `700 ${fs}px ${SERIF}`; } while (x.measureText(name).width > W - 360 && (fs -= 4) > 40);
+  x.fillStyle = '#0E6B4F'; x.fillText(name, W / 2, 725);
+  x.strokeStyle = '#C7D1DA'; x.lineWidth = 2; x.beginPath(); x.moveTo(W / 2 - 440, 765); x.lineTo(W / 2 + 440, 765); x.stroke();
+  x.fillStyle = '#14212E'; x.font = `400 38px ${SANS}`;
+  x.fillText(`за успешное прохождение всех ${LESSONS.length} уроков курса`, W / 2, 850);
+  x.fillText('и умение распознать мошенников', W / 2, 905);
+  x.fillStyle = '#4A5866'; x.font = `600 30px ${SANS}`;
+  x.textAlign = 'left'; x.fillText(gradDate(), 190, 1090);
+  x.textAlign = 'right'; x.fillText(`Звёзд бдительности: ${ST.stars}`, W - 190, 1090);
+  return c.toDataURL('image/png');
+}
+
+/* ---------- маршруты ---------- */
+function route(h){
+  h = h == null ? location.hash.slice(1) : h;
+  const L = LESSONS.find(l => l.id === h);
+  if (L) return video(L);
+  if (h === 'cases') return cases();
+  if (h === 'cert') return cert();
+  home();
+}
+function routeNav(h){ h = h == null ? location.hash.slice(1) : h; route(h); renderSide(h); }
+/* свежие истории из файла cases.json рядом со страницей (если есть) */
+fetch('cases.json?t=' + Date.now(), {cache:'no-store'}).then(r => r.ok ? r.json() : null).then(d => {
+  if (d && Array.isArray(d.cases) && d.cases.length) { CASES = d.cases; CASES_UPDATED = d.updated || CASES_UPDATED; if (!location.hash || location.hash === '#cases') routeNav(); else renderSide(); }
+}).catch(() => {});
+if (TTS) { try { speechSynthesis.onvoiceschanged = () => {}; } catch (_) {} }
+$('#menu').onclick = openSide;
+$('#backdrop').onclick = closeSide;
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSide(); });
+routeNav();
+</script>
+
+</body></html>
